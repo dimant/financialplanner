@@ -30,6 +30,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     setupToolLink('retirement-link', 'retirement.html', 'initRetirementPlanner');
     setupToolLink('homepurchase-link', 'homepurchase.html', 'initHomePurchasePlanner');
+
+    // Add event listener for Home button
+    var homeLink = document.getElementById('home-link');
+    if (homeLink) {
+        homeLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            fetch('home.html')
+                .then(function(response) { return response.text(); })
+                .then(function(html) {
+                    document.getElementById('tool-content').innerHTML = html;
+                });
+        });
+    }
 });
 
 function getHomePurchaseParametersFromForm() {

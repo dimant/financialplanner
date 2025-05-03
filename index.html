@@ -18,7 +18,7 @@
                 style="font-family: 'Montserrat', sans-serif;">Financial Planner</h1>
             <nav>
                 <ul class="flex space-x-6">
-                    <li><a href="#" class="text-white hover:text-lime-100 font-medium transition">Home</a></li>
+                    <li><a href="#" id="home-link" class="text-white hover:text-lime-100 font-medium transition">Home</a></li>
                     <li class="relative group">
                         <button class="text-white hover:text-lime-100 font-medium transition focus:outline-none flex items-center">
                             Tools
@@ -34,7 +34,7 @@
             </nav>
         </div>
     </header>
-    <div id="tool-content"></div>
+    <div id="tool-content" hx-get="home.html" hx-trigger="load" hx-swap="innerHTML"></div>
     <footer class="bg-gradient-to-r from-emerald-600 via-green-500 to-lime-500 text-white py-6 mt-16">
         <div class="container mx-auto text-center">
             <p class="font-medium">&copy; 2025 Financial Planner. All rights reserved.</p>
