@@ -1,5 +1,60 @@
-// Parse all input fields in the form and return a parameters object
-function getParametersFromForm() {
+document.addEventListener('DOMContentLoaded', function() {
+    function setupToolLink(linkId, htmlFile, initFunctionName) {
+        var link = document.getElementById(linkId);
+        if (link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                fetch(htmlFile)
+                    .then(function(response) { return response.text(); })
+                    .then(function(html) {
+                        document.getElementById('tool-content').innerHTML = html;
+                        setTimeout(function() {
+                            var scripts = document.getElementById('tool-content').querySelectorAll('script');
+                            scripts.forEach(function(oldScript) {
+                                var newScript = document.createElement('script');
+                                if (oldScript.src) {
+                                    newScript.src = oldScript.src;
+                                } else {
+                                    newScript.textContent = oldScript.textContent;
+                                }
+                                oldScript.parentNode.replaceChild(newScript, oldScript);
+                            });
+                            if (typeof window[initFunctionName] === 'function') {
+                                window[initFunctionName]();
+                            }
+                        }, 0);
+                    });
+            });
+        }
+    }
+
+    setupToolLink('retirement-link', 'retirement.html', 'initRetirementPlanner');
+    setupToolLink('homepurchase-link', 'homepurchase.html', 'initHomePurchasePlanner');
+});
+
+function getHomePurchaseParametersFromForm() {
+    return {
+        // Home Purchase (Owner)
+        downPayment: Number(document.getElementById('downPayment').value),
+        loanAmount: Number(document.getElementById('loanAmount').value),
+        mortgageRate: Number(document.getElementById('mortgageRate').value) / 100,
+        mortgageYears: Number(document.getElementById('mortgageYears').value),
+        monthlyPayment: Number(document.getElementById('monthlyPayment').value),
+        homeAppreciationMean: Number(document.getElementById('homeAppreciationMean').value) / 100,
+        homeAppreciationStd: Number(document.getElementById('homeAppreciationStd').value),
+        propertyTaxes: Number(document.getElementById('propertyTaxes').value),
+        homeInsurance: Number(document.getElementById('homeInsurance').value),
+        maintenanceRate: Number(document.getElementById('maintenanceRate').value) / 100,
+        hoaFees: Number(document.getElementById('hoaFees').value),
+        buyingCosts: Number(document.getElementById('buyingCosts').value) / 100,
+        sellingCosts: Number(document.getElementById('sellingCosts').value) / 100,
+        mortgageDeduction: document.getElementById('mortgageDeduction').value,
+        taxRate: Number(document.getElementById('taxRate').value) / 100,
+        NumSimulations: Number(document.getElementById('numSimulations').value)
+    };
+}
+
+function getRetirementParametersFromForm() {
     return {
         CurrentSavings: Number(document.getElementById('currentSavings').value),
         AnnualSavings: Number(document.getElementById('annualSavings').value),
@@ -145,14 +200,14 @@ let growthChartInstance = null;
 
 
 // Run multiple simulations and return avg, p5, p95 arrays
-function runSimulations(params, makeNormalGenerator) {
+function runSimulations(params, simulation, makeNormalGenerator) {
     const numSimulations = params.NumSimulations || 1;
     const allSimulations = [];
     let maxLen = 0;
     for (let i = 0; i < numSimulations; i++) {
         // Use a different seed for each simulation for variety
         const normalGen = makeNormalGenerator(params.MeanReturn, params.StandardDeviationReturn);
-        const sim = retirementSimulation(params, normalGen);
+        const sim = simulation(params, normalGen);
         allSimulations.push(sim);
         if (sim.length > maxLen) maxLen = sim.length;
     }
@@ -178,11 +233,11 @@ function runSimulations(params, makeNormalGenerator) {
     return { avg, p5, p95 };
 }
 
-function updateGrowthChart(endYear) {
+function updateGrowthChart() {
     const startYear = 2025;
-    const params = getParametersFromForm();
+    const params = getRetirementParametersFromForm();
     // Use the new runSimulations function
-    const { avg, p5, p95 } = runSimulations(params, makeNormalGenerator);
+    const { avg, p5, p95 } = runSimulations(params, retirementSimulation, makeNormalGenerator);
     const ctx = document.getElementById('growthChart').getContext('2d');
     if (growthChartInstance) {
         growthChartInstance.destroy();
@@ -267,15 +322,72 @@ function updateGrowthChart(endYear) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+// Expose initRetirementPlanner globally so it can be called after dynamic content load
+function initRetirementPlanner() {
     const yearsUntilRetirementInput = document.getElementById('yearsUntilRetirement');
+    const planningHorizonForm = document.getElementById('planningHorizonForm');
+    if (!yearsUntilRetirementInput || !planningHorizonForm) return;
     const startYear = 2025;
     let endYear = startYear + Number(yearsUntilRetirementInput.value);
     updateGrowthChart(endYear);
 
-    planningHorizonForm.addEventListener('submit', function(e) {
+    // Remove previous event listeners by cloning the form
+    const newForm = planningHorizonForm.cloneNode(true);
+    planningHorizonForm.parentNode.replaceChild(newForm, planningHorizonForm);
+    newForm.addEventListener('submit', function(e) {
         e.preventDefault();
         endYear = startYear + Number(yearsUntilRetirementInput.value);
         updateGrowthChart(endYear);
     });
-});
+}
+
+// Simulate home purchase: tracks home value, mortgage balance, and equity over time
+function homePurchaseSimulation(params, randomDistribution) {
+    // params: {
+    //   downPayment, loanAmount, mortgageRate, mortgageYears, monthlyPayment, homeAppreciationMean, homeAppreciationStd, ...
+    // }
+    // randomDistribution: function returning a random value (mean/variance handled by generator)
+
+    const years = params.mortgageYears;
+    let homeValue = params.downPayment + params.loanAmount;
+    let mortgageBalance = params.loanAmount;
+    const annualRate = params.mortgageRate;
+    const n = years;
+    const monthlyRate = annualRate / 12;
+    const numPayments = n * 12;
+    // Calculate fixed monthly payment if not provided
+    let monthlyPayment = params.monthlyPayment;
+    if (!monthlyPayment || monthlyPayment === 0) {
+        monthlyPayment = (mortgageBalance * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -numPayments));
+    }
+
+    const homeValues = [];
+    const mortgageBalances = [];
+    const equities = [];
+
+    for (let year = 0; year < years; year++) {
+        // Home appreciation
+        const appreciation = randomDistribution();
+        homeValue *= 1 + appreciation;
+
+        // Mortgage amortization
+        for (let m = 0; m < 12; m++) {
+            if (mortgageBalance > 0) {
+                const interest = mortgageBalance * monthlyRate;
+                const principal = Math.min(monthlyPayment - interest, mortgageBalance);
+                mortgageBalance -= principal;
+            }
+        }
+
+        // Track values
+        homeValues.push(homeValue);
+        mortgageBalances.push(Math.max(mortgageBalance, 0));
+        equities.push(homeValue - Math.max(mortgageBalance, 0));
+    }
+
+    return {
+        homeValues,
+        mortgageBalances,
+        equities
+    };
+}
