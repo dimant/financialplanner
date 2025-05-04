@@ -61,7 +61,6 @@ function getHomePurchaseParametersFromForm() {
         hoaFees: Number(document.getElementById('hoaFees').value),
         buyingCosts: Number(document.getElementById('buyingCosts').value) / 100,
         sellingCosts: Number(document.getElementById('sellingCosts').value) / 100,
-        mortgageDeduction: document.getElementById('mortgageDeduction').value,
         taxRate: Number(document.getElementById('taxRate').value) / 100,
         NumSimulations: Number(document.getElementById('numSimulations').value)
     };
@@ -151,76 +150,16 @@ function retirementSimulation(params, randomDistribution) {
     return assets;
 }
 
-function drawGrowthChart({ ctx, startYear, endYear, data }) {
-    const years = Array.from({length: endYear - startYear + 1}, (_, i) => startYear + i);
-    return new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: years,
-            datasets: [{
-                label: 'Portfolio Value (USD)',
-                data: data,
-                borderColor: '#059669',
-                backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                fill: true,
-                tension: 0.3,
-                pointRadius: 4,
-                pointBackgroundColor: '#059669',
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: {
-                        color: '#166534',
-                        font: { family: 'Montserrat', weight: 'bold' }
-                    }
-                },
-            },
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Year',
-                        color: '#166534',
-                        font: { family: 'Montserrat', weight: 'bold' }
-                    },
-                    ticks: { color: '#166534' }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'USD',
-                        color: '#166534',
-                        font: { family: 'Montserrat', weight: 'bold' }
-                    },
-                    ticks: {
-                        color: '#166534',
-                        callback: function(value) {
-                            return '$' + value.toLocaleString();
-                        }
-                    },
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-}
-
 let growthChartInstance = null;
 
 
 // Run multiple simulations and return avg, p5, p95 arrays
-function runSimulations(params, simulation, makeNormalGenerator) {
-    const numSimulations = params.NumSimulations || 1;
+function runSimulations(simulation, numSimulations) {
     const allSimulations = [];
     let maxLen = 0;
     for (let i = 0; i < numSimulations; i++) {
         // Use a different seed for each simulation for variety
-        const normalGen = makeNormalGenerator(params.MeanReturn, params.StandardDeviationReturn);
-        const sim = simulation(params, normalGen);
+        const sim = simulation();
         allSimulations.push(sim);
         if (sim.length > maxLen) maxLen = sim.length;
     }
@@ -246,11 +185,8 @@ function runSimulations(params, simulation, makeNormalGenerator) {
     return { avg, p5, p95 };
 }
 
-function updateGrowthChart() {
-    const startYear = 2025;
-    const params = getRetirementParametersFromForm();
-    // Use the new runSimulations function
-    const { avg, p5, p95 } = runSimulations(params, retirementSimulation, makeNormalGenerator);
+function updateGrowthChart(startYear, dataGenerator) {
+    const { avg, p5, p95 } = dataGenerator();
     const ctx = document.getElementById('growthChart').getContext('2d');
     if (growthChartInstance) {
         growthChartInstance.destroy();
@@ -340,9 +276,16 @@ function initRetirementPlanner() {
     const yearsUntilRetirementInput = document.getElementById('yearsUntilRetirement');
     const planningHorizonForm = document.getElementById('planningHorizonForm');
     if (!yearsUntilRetirementInput || !planningHorizonForm) return;
-    const startYear = 2025;
+    const startYear = new Date().getFullYear();
+
+    const dataGenerator = () => {
+        const params = getRetirementParametersFromForm();
+        const simulation = () => retirementSimulation(params, makeNormalGenerator(params.MeanReturn, params.StandardDeviationReturn));
+        return runSimulations(simulation, params.NumSimulations);
+    };
+
     let endYear = startYear + Number(yearsUntilRetirementInput.value);
-    updateGrowthChart(endYear);
+    updateGrowthChart(startYear, dataGenerator);
 
     // Remove previous event listeners by cloning the form
     const newForm = planningHorizonForm.cloneNode(true);
@@ -350,8 +293,79 @@ function initRetirementPlanner() {
     newForm.addEventListener('submit', function(e) {
         e.preventDefault();
         endYear = startYear + Number(yearsUntilRetirementInput.value);
-        updateGrowthChart(endYear);
+        updateGrowthChart(startYear, dataGenerator);
     });
+}
+
+function initHomePurchasePlanner() {
+    const startYear = new Date().getFullYear();
+
+    // Helper to estimate monthly payment (principal + interest for first year, averaged per month)
+    function estimateMonthlyPayment(loanAmount, mortgageRate, mortgageYears) {
+        const monthlyRate = mortgageRate / 12;
+        const numPayments = mortgageYears * 12;
+        if (monthlyRate === 0) return loanAmount / numPayments;
+        // Calculate fixed monthly payment
+        const fixedPayment = (loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -numPayments));
+        let balance = loanAmount;
+        let totalPaid = 0;
+        for (let m = 0; m < 12 && balance > 0; m++) {
+            const interest = balance * monthlyRate;
+            const principal = Math.min(fixedPayment - interest, balance);
+            totalPaid += interest + principal;
+            balance -= principal;
+        }
+        // Average monthly payment for the first year
+        return totalPaid / 12;
+    }
+
+    // Set up mortgage payment estimation and disable input
+    function setupMortgagePaymentField() {
+        const loanAmountInput = document.getElementById('loanAmount');
+        const mortgageRateInput = document.getElementById('mortgageRate');
+        const mortgageYearsInput = document.getElementById('mortgageYears');
+        const monthlyPaymentInput = document.getElementById('monthlyPayment');
+        if (!loanAmountInput || !mortgageRateInput || !mortgageYearsInput || !monthlyPaymentInput) return;
+
+        function updateMonthlyPayment() {
+            const loanAmount = Number(loanAmountInput.value);
+            const mortgageRate = Number(mortgageRateInput.value) / 100;
+            const mortgageYears = Number(mortgageYearsInput.value);
+            const payment = estimateMonthlyPayment(loanAmount, mortgageRate, mortgageYears);
+            monthlyPaymentInput.value = isFinite(payment) ? payment.toFixed(2) : '';
+        }
+
+        // Disable the field
+        monthlyPaymentInput.disabled = true;
+
+        // Update on input changes
+        loanAmountInput.addEventListener('input', updateMonthlyPayment);
+        mortgageRateInput.addEventListener('input', updateMonthlyPayment);
+        mortgageYearsInput.addEventListener('input', updateMonthlyPayment);
+        // Initial update
+        updateMonthlyPayment();
+    }
+
+    setupMortgagePaymentField();
+
+    const dataGenerator = () => {
+        const params = getHomePurchaseParametersFromForm();
+        const simulation = () => homePurchaseSimulation(params, makeNormalGenerator(params.homeAppreciationMean, params.homeAppreciationStd));
+        return runSimulations(simulation, params.NumSimulations);
+    };
+    updateGrowthChart(startYear, dataGenerator);
+
+    // Remove previous event listeners by cloning the form
+    const homePurchaseForm = document.getElementById('homePurchaseForm');
+    if (!homePurchaseForm) return;
+    const newForm = homePurchaseForm.cloneNode(true);
+    homePurchaseForm.parentNode.replaceChild(newForm, homePurchaseForm);
+    newForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        updateGrowthChart(startYear, dataGenerator);
+    });
+    // Re-setup mortgage payment field after cloning
+    setTimeout(setupMortgagePaymentField, 0);
 }
 
 // Simulate home purchase: tracks home value, mortgage balance, and equity over time
@@ -374,9 +388,7 @@ function homePurchaseSimulation(params, randomDistribution) {
         monthlyPayment = (mortgageBalance * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -numPayments));
     }
 
-    const homeValues = [];
-    const mortgageBalances = [];
-    const equities = [];
+    const netProceeds = [];
 
     for (let year = 0; year < years; year++) {
         // Home appreciation
@@ -392,15 +404,11 @@ function homePurchaseSimulation(params, randomDistribution) {
             }
         }
 
-        // Track values
-        homeValues.push(homeValue);
-        mortgageBalances.push(Math.max(mortgageBalance, 0));
-        equities.push(homeValue - Math.max(mortgageBalance, 0));
+        // Calculate net proceeds if sold this year
+        const sellingCosts = params.sellingCosts || 0;
+        const proceeds = homeValue - Math.max(mortgageBalance, 0) - (sellingCosts * homeValue);
+        netProceeds.push(proceeds);
     }
 
-    return {
-        homeValues,
-        mortgageBalances,
-        equities
-    };
+    return netProceeds;
 }
