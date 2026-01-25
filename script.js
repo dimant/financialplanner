@@ -1,48 +1,56 @@
-document.addEventListener('DOMContentLoaded', function() {
-    function setupToolLink(linkId, htmlFile, initFunctionName) {
-        var link = document.getElementById(linkId);
-        if (link) {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                fetch(htmlFile)
-                    .then(function(response) { return response.text(); })
-                    .then(function(html) {
-                        document.getElementById('tool-content').innerHTML = html;
-                        setTimeout(function() {
-                            var scripts = document.getElementById('tool-content').querySelectorAll('script');
-                            scripts.forEach(function(oldScript) {
-                                var newScript = document.createElement('script');
-                                if (oldScript.src) {
-                                    newScript.src = oldScript.src;
-                                } else {
-                                    newScript.textContent = oldScript.textContent;
-                                }
-                                oldScript.parentNode.replaceChild(newScript, oldScript);
-                            });
-                            if (typeof window[initFunctionName] === 'function') {
-                                window[initFunctionName]();
-                            }
-                        }, 0);
-                    });
-            });
-        }
+function loadAndInitializeTool(htmlFile, initFunctionName) {
+    fetch(htmlFile)
+        .then(response => response.text())
+        .then(html => {
+            const toolContent = document.getElementById('tool-content');
+            toolContent.innerHTML = html;
+            // Re-execute scripts after DOM update
+            setTimeout(() => {
+                const scripts = toolContent.querySelectorAll('script');
+                scripts.forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src;
+                    } else {
+                        newScript.textContent = oldScript.textContent;
+                    }
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+                if (typeof window[initFunctionName] === 'function') {
+                    window[initFunctionName]();
+                }
+            }, 0);
+        });
+}
+
+function setupToolLink(linkId, htmlFile, initFunctionName) {
+    const link = document.getElementById(linkId);
+    if (link) {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            loadAndInitializeTool(htmlFile, initFunctionName);
+        });
     }
+}
 
-    setupToolLink('retirement-link', 'retirement.html', 'initRetirementPlanner');
-    setupToolLink('homepurchase-link', 'homepurchase.html', 'initHomePurchasePlanner');
-
-    // Add event listener for Home button
-    var homeLink = document.getElementById('home-link');
+function setupHomeLink() {
+    const homeLink = document.getElementById('home-link');
     if (homeLink) {
-        homeLink.addEventListener('click', function(e) {
+        homeLink.addEventListener('click', (e) => {
             e.preventDefault();
             fetch('home.html')
-                .then(function(response) { return response.text(); })
-                .then(function(html) {
+                .then(response => response.text())
+                .then(html => {
                     document.getElementById('tool-content').innerHTML = html;
                 });
         });
     }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    setupToolLink('retirement-link', 'retirement.html', 'initRetirementPlanner');
+    setupToolLink('homepurchase-link', 'homepurchase.html', 'initHomePurchasePlanner');
+    setupHomeLink();
 });
 
 function getHomePurchaseParametersFromForm() {
@@ -110,7 +118,7 @@ function makeNormalGenerator(mean, stddev) {
             v = rng() * 2 - 1;
             s = u * u + v * v;
         } while (s === 0 || s >= 1);
-        const mul = Math.sqrt(-2.0 * Math.log(s) / s);
+        const mul = Math.sqrt(-2 * Math.log(s) / s);
         spare = v * mul;
         return mean + stddev * u * mul;
     };
@@ -284,7 +292,6 @@ function initRetirementPlanner() {
         return runSimulations(simulation, params.NumSimulations);
     };
 
-    let endYear = startYear + Number(yearsUntilRetirementInput.value);
     updateGrowthChart(startYear, dataGenerator);
 
     // Remove previous event listeners by cloning the form
@@ -292,32 +299,31 @@ function initRetirementPlanner() {
     planningHorizonForm.parentNode.replaceChild(newForm, planningHorizonForm);
     newForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        endYear = startYear + Number(yearsUntilRetirementInput.value);
         updateGrowthChart(startYear, dataGenerator);
     });
 }
 
+// Helper to estimate monthly payment (principal + interest for first year, averaged per month)
+function estimateMonthlyPayment(loanAmount, mortgageRate, mortgageYears) {
+    const monthlyRate = mortgageRate / 12;
+    const numPayments = mortgageYears * 12;
+    if (monthlyRate === 0) return loanAmount / numPayments;
+    // Calculate fixed monthly payment
+    const fixedPayment = (loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -numPayments));
+    let balance = loanAmount;
+    let totalPaid = 0;
+    for (let m = 0; m < 12 && balance > 0; m++) {
+        const interest = balance * monthlyRate;
+        const principal = Math.min(fixedPayment - interest, balance);
+        totalPaid += interest + principal;
+        balance -= principal;
+    }
+    // Average monthly payment for the first year
+    return totalPaid / 12;
+}
+
 function initHomePurchasePlanner() {
     const startYear = new Date().getFullYear();
-
-    // Helper to estimate monthly payment (principal + interest for first year, averaged per month)
-    function estimateMonthlyPayment(loanAmount, mortgageRate, mortgageYears) {
-        const monthlyRate = mortgageRate / 12;
-        const numPayments = mortgageYears * 12;
-        if (monthlyRate === 0) return loanAmount / numPayments;
-        // Calculate fixed monthly payment
-        const fixedPayment = (loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -numPayments));
-        let balance = loanAmount;
-        let totalPaid = 0;
-        for (let m = 0; m < 12 && balance > 0; m++) {
-            const interest = balance * monthlyRate;
-            const principal = Math.min(fixedPayment - interest, balance);
-            totalPaid += interest + principal;
-            balance -= principal;
-        }
-        // Average monthly payment for the first year
-        return totalPaid / 12;
-    }
 
     // Set up mortgage payment estimation and disable input
     function setupMortgagePaymentField() {
@@ -332,7 +338,7 @@ function initHomePurchasePlanner() {
             const mortgageRate = Number(mortgageRateInput.value) / 100;
             const mortgageYears = Number(mortgageYearsInput.value);
             const payment = estimateMonthlyPayment(loanAmount, mortgageRate, mortgageYears);
-            monthlyPaymentInput.value = isFinite(payment) ? payment.toFixed(2) : '';
+            monthlyPaymentInput.value = Number.isFinite(payment) ? payment.toFixed(2) : '';
         }
 
         // Disable the field
@@ -414,5 +420,5 @@ function homePurchaseSimulation(params, randomDistribution) {
 }
 
 // Ensure functions are not tree-shaken
-window.initRetirementPlanner = initRetirementPlanner;
-window.initHomePurchasePlanner = initHomePurchasePlanner;
+globalThis.initRetirementPlanner = initRetirementPlanner;
+globalThis.initHomePurchasePlanner = initHomePurchasePlanner;
