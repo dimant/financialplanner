@@ -1,3 +1,8 @@
+/**
+ * Loads an HTML file and initializes it with a specified function
+ * @param {string} htmlFile - Path to the HTML file to load
+ * @param {string} initFunctionName - Name of the initialization function to call
+ */
 function loadAndInitializeTool(htmlFile, initFunctionName) {
     fetch(htmlFile)
         .then(response => response.text())
@@ -23,6 +28,12 @@ function loadAndInitializeTool(htmlFile, initFunctionName) {
         });
 }
 
+/**
+ * Sets up event listener for a tool link to load and initialize content
+ * @param {string} linkId - ID of the link element
+ * @param {string} htmlFile - Path to the HTML file to load
+ * @param {string} initFunctionName - Name of the initialization function to call
+ */
 function setupToolLink(linkId, htmlFile, initFunctionName) {
     const link = document.getElementById(linkId);
     if (link) {
@@ -33,6 +44,9 @@ function setupToolLink(linkId, htmlFile, initFunctionName) {
     }
 }
 
+/**
+ * Sets up the home link to load and display home.html
+ */
 function setupHomeLink() {
     const homeLink = document.getElementById('home-link');
     if (homeLink) {
@@ -53,6 +67,10 @@ document.addEventListener('DOMContentLoaded', function() {
     setupHomeLink();
 });
 
+/**
+ * Collects home purchase form inputs and returns them as an object
+ * @returns {Object} Object containing home purchase parameters
+ */
 function getHomePurchaseParametersFromForm() {
     return {
         // Home Purchase (Owner)
@@ -91,6 +109,11 @@ function getRetirementParametersFromForm() {
     };
 }
 
+/**
+ * Mulberry32 pseudorandom number generator implementation
+ * @param {number} seed - Seed value for the generator
+ * @returns {Function} Function that returns random numbers between 0 and 1
+ */
 function mulberry32(seed) {
     return function() {
         let t = seed += 0x6D2B79F5;
@@ -100,6 +123,12 @@ function mulberry32(seed) {
     };
 }
 
+/**
+ * Creates a normal distribution random number generator
+ * @param {number} mean - Mean of the normal distribution
+ * @param {number} stddev - Standard deviation of the normal distribution
+ * @returns {Function} Function that returns normally distributed random numbers
+ */
 function makeNormalGenerator(mean, stddev) {
     // Use Box-Muller transform with seeded RNG
     let spare = null;
@@ -124,6 +153,12 @@ function makeNormalGenerator(mean, stddev) {
     };
 }
 
+/**
+ * Simulates retirement portfolio growth over time
+ * @param {Object} params - Retirement parameters (savings, expenses, returns, etc.)
+ * @param {Function} randomDistribution - Random number generator function
+ * @returns {Array} Array of portfolio values over time
+ */
 function retirementSimulation(params, randomDistribution) {
     // params: {
     //   CurrentSavings, AnnualSavings, YearsUntilRetirement, RetirementYears, AnnualExpenses, InflationRate, RetirementTaxRate
@@ -160,8 +195,12 @@ function retirementSimulation(params, randomDistribution) {
 
 let growthChartInstance = null;
 
-
-// Run multiple simulations and return avg, p5, p95 arrays
+/**
+ * Runs multiple simulations and returns aggregated statistics
+ * @param {Function} simulation - Simulation function to run
+ * @param {number} numSimulations - Number of simulations to run
+ * @returns {Object} Object with avg, p5, and p95 percentile arrays
+ */
 function runSimulations(simulation, numSimulations) {
     const allSimulations = [];
     let maxLen = 0;
@@ -193,6 +232,11 @@ function runSimulations(simulation, numSimulations) {
     return { avg, p5, p95 };
 }
 
+/**
+ * Updates the growth chart with new simulation data
+ * @param {number} startYear - Starting year for the chart
+ * @param {Function} dataGenerator - Function that generates simulation data
+ */
 function updateGrowthChart(startYear, dataGenerator) {
     const { avg, p5, p95 } = dataGenerator();
     const ctx = document.getElementById('growthChart').getContext('2d');
@@ -279,7 +323,9 @@ function updateGrowthChart(startYear, dataGenerator) {
     });
 }
 
-// Expose initRetirementPlanner globally so it can be called after dynamic content load
+/**
+ * Initializes the retirement planner tool with form and chart
+ */
 function initRetirementPlanner() {
     const yearsUntilRetirementInput = document.getElementById('yearsUntilRetirement');
     const planningHorizonForm = document.getElementById('planningHorizonForm');
@@ -303,7 +349,13 @@ function initRetirementPlanner() {
     });
 }
 
-// Helper to estimate monthly payment (principal + interest for first year, averaged per month)
+/**
+ * Estimates the monthly mortgage payment for the first year
+ * @param {number} loanAmount - Loan amount in dollars
+ * @param {number} mortgageRate - Annual mortgage rate as decimal
+ * @param {number} mortgageYears - Loan term in years
+ * @returns {number} Estimated average monthly payment
+ */
 function estimateMonthlyPayment(loanAmount, mortgageRate, mortgageYears) {
     const monthlyRate = mortgageRate / 12;
     const numPayments = mortgageYears * 12;
@@ -322,6 +374,9 @@ function estimateMonthlyPayment(loanAmount, mortgageRate, mortgageYears) {
     return totalPaid / 12;
 }
 
+/**
+ * Initializes the home purchase planner tool with form and chart
+ */
 function initHomePurchasePlanner() {
     const startYear = new Date().getFullYear();
 
@@ -374,7 +429,12 @@ function initHomePurchasePlanner() {
     setTimeout(setupMortgagePaymentField, 0);
 }
 
-// Simulate home purchase: tracks home value, mortgage balance, and equity over time
+/**
+ * Simulates home purchase: tracks home value, mortgage balance, and equity over time
+ * @param {*} params Purchase parameters (down payment, loan amount, rates, etc.)
+ * @param {*} randomDistribution Random number generator function
+ * @returns 
+ */
 function homePurchaseSimulation(params, randomDistribution) {
     // params: {
     //   downPayment, loanAmount, mortgageRate, mortgageYears, monthlyPayment, homeAppreciationMean, homeAppreciationStd, ...
@@ -419,6 +479,8 @@ function homePurchaseSimulation(params, randomDistribution) {
     return netProceeds;
 }
 
-// Ensure functions are not tree-shaken
+/**
+ * Exposes initialization functions globally to prevent tree-shaking
+ */
 globalThis.initRetirementPlanner = initRetirementPlanner;
 globalThis.initHomePurchasePlanner = initHomePurchasePlanner;
