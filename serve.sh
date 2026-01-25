@@ -4,8 +4,13 @@
 # Usage: ./serve.sh
 
 PORT=8000
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}/dist")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DIR="${1:-.}"
+if [[ "$DIR" != /* ]]; then
+    DIR="$SCRIPT_DIR/$DIR"
+fi
 
+echo "Serving files from $DIR"
 echo "Serving HTTP on http://localhost:$PORT/"
 
 # Use Python's built-in HTTP server if available, otherwise use nc
