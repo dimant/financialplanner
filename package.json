@@ -1,0 +1,14 @@
+{
+  "name": "financial-planner",
+  "version": "1.0.0",
+  "description": "Financial planning tool",
+  "scripts": {
+    "build": "rm -rf dist && webpack --mode production --config webpack.config.js"
+  },
+  "devDependencies": {
+    "webpack": "^5",
+    "webpack-cli": "^5",
+    "terser-webpack-plugin": "^5",
+    "copy-webpack-plugin": "^11"
+  }
+}

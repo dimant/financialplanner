@@ -4,7 +4,7 @@
 # Usage: ./serve.sh
 
 PORT=8000
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}/dist")" && pwd)"
 
 echo "Serving HTTP on http://localhost:$PORT/"
 

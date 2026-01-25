@@ -412,3 +412,7 @@ function homePurchaseSimulation(params, randomDistribution) {
 
     return netProceeds;
 }
+
+// Ensure functions are not tree-shaken
+window.initRetirementPlanner = initRetirementPlanner;
+window.initHomePurchasePlanner = initHomePurchasePlanner;
