@@ -62,7 +62,7 @@
 
             <!-- Sidebar header with title and close button -->
             <div class="flex justify-between mb-4 mt-6 ml-4 lg:mt-0 lg:ml-0">
-                <span class="font-bold text-5xl lg:text-2xl">Controls</span>
+                <span class="font-bold text-2xl">Controls</span>
                 <!-- Close button: Closes sidebar by setting isOpen to false -->
                 <button class="p-2 rounded hover:bg-blue-800 lg:hidden" @click="isOpen = false">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 sm:h-12 sm:w-12" fill="none"
@@ -286,16 +286,16 @@
             <!-- Hero Section -->
             <div x-data="{ heroOpen: true }" class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg shadow mb-8 border border-emerald-100">
                 <button @click="heroOpen = !heroOpen" class="w-full flex items-center justify-between p-8 text-left hover:bg-emerald-100/30 transition">
-                    <h2 class="text-3xl lg:text-4xl font-bold text-emerald-900" style="font-family: 'Montserrat', sans-serif;">Your Retirement Journey</h2>
+                    <h2 class="text-3xl font-bold text-emerald-900" style="font-family: 'Montserrat', sans-serif;">Your Retirement Journey</h2>
                     <svg class="w-6 h-6 text-emerald-900 flex-shrink-0 ml-4 transition-transform duration-200" :class="{ 'rotate-180': !heroOpen }" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </button>
                 <div x-show="heroOpen" x-transition class="px-8 pb-8 space-y-4">
-                    <p class="text-xl sm:text-2xl text-emerald-800 leading-relaxed">
+                    <p class="text-lg text-emerald-800 leading-relaxed">
                         Retirement planning is a lot to think about. This tool simulates thousands of possible futures based on your savings, contributions, and expected spending to show you a realistic range of outcomes.
                     </p>
-                    <p class="text-xl sm:text-2xl text-emerald-700 leading-relaxed">
+                    <p class="text-lg text-emerald-700 leading-relaxed">
                         <strong>How it works:</strong> Enter your current savings, how much you plan to save each year, and what you expect to spend in retirement. We show you what different market scenarios could mean for your portfolio, so you can make decisions with more confidence.
                     </p>
                     <p class="text-sm text-emerald-600 mt-6">
