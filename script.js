@@ -262,8 +262,10 @@ document.addEventListener('DOMContentLoaded', function() {
         return runSimulations(simulation, params.NumSimulations);
     };
 
-    // Initial chart load
-    updateGrowthChart(startYear, dataGenerator);
+    // Defer initial chart calculation to avoid blocking DOMContentLoaded
+    requestAnimationFrame(() => {
+        updateGrowthChart(startYear, dataGenerator);
+    });
 
     // Hook up form submission to update chart
     const form = document.querySelector('form');
