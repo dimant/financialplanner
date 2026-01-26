@@ -81,7 +81,7 @@ function retirementSimulation(params, randomDistribution) {
  * Runs multiple simulations and returns aggregated statistics
  * @param {Function} simulation - Simulation function to run
  * @param {number} numSimulations - Number of simulations to run
- * @returns {Object} Object with avg, p5, and p95 percentile arrays
+ * @returns {Object} Object with avg, p5, p95 percentile arrays, and allSimulations
  */
 function runSimulations(simulation, numSimulations) {
     const allSimulations = [];
@@ -110,7 +110,7 @@ function runSimulations(simulation, numSimulations) {
         const idx95 = Math.ceil(0.95 * (n - 1));
         p95.push(values[idx95]);
     }
-    return { avg, p5, p95 };
+    return { avg, p5, p95, allSimulations };
 }
 
 /**
@@ -133,12 +133,65 @@ function getRetirementParametersFromForm() {
 }
 
 /**
+ * Updates the results summary section with key metrics
+ * @param {Object} params - Retirement parameters
+ * @param {Object} chartData - Chart data with avg array and all simulations
+ */
+function updateResultsSummary(params, chartData) {
+    const { avg, allSimulations } = chartData;
+    
+    // Get portfolio values at key points from mean estimate
+    const retirementYear = params.YearsUntilRetirement;
+    const endYear = retirementYear + params.RetirementYears;
+    
+    // Use mean values from avg array (already calculated in runSimulations)
+    const avgAtRetirement = avg[Math.min(retirementYear - 1, avg.length - 1)];
+    const avgAtEnd = avg[Math.min(endYear - 1, avg.length - 1)];
+    
+    // Calculate success rate (% of simulations that don't go negative)
+    const successCount = allSimulations.filter(sim => sim[Math.min(endYear - 1, sim.length - 1)] > 0).length;
+    const successRate = (successCount / allSimulations.length * 100).toFixed(0);
+    
+    // Format currency
+    const formatCurrency = (val) => '$' + Math.round(val).toLocaleString();
+    
+    // Update DOM elements
+    document.getElementById('portfolioAtRetirement').textContent = formatCurrency(avgAtRetirement);
+    document.getElementById('portfolioAtEnd').textContent = formatCurrency(avgAtEnd);
+    document.getElementById('successRate').textContent = successRate + '%';
+    
+    // Generate guidance text based on success rate
+    let guidanceText = '';
+    if (successRate >= 95) {
+        guidanceText = 'Your plan looks very solid. You have a strong buffer for market downturns and unexpected expenses.';
+    } else if (successRate >= 80) {
+        guidanceText = 'Your plan is on a good track. Most scenarios work out well, but consider increasing savings or adjusting spending to add more cushion.';
+    } else if (successRate >= 60) {
+        guidanceText = 'Your plan has some risk. Consider saving more, working a bit longer, or planning to spend less in early retirement.';
+    } else {
+        guidanceText = 'Your current plan faces significant challenges. Consider increasing savings, adjusting retirement timing, or revisiting your spending goals with a financial advisor.';
+    }
+    
+    document.getElementById('guidanceText').textContent = guidanceText;
+    
+    // Update expected outcome (portfolio value at end of retirement)
+    const expectedOutcomeEl = document.getElementById('expectedOutcome');
+    if (avgAtEnd > 0) {
+        expectedOutcomeEl.textContent = formatCurrency(avgAtEnd);
+        expectedOutcomeEl.classList.remove('text-orange-600');
+    } else {
+        expectedOutcomeEl.textContent = 'Review';
+        expectedOutcomeEl.classList.add('text-orange-600');
+    }
+}
+
+/**
  * Updates the growth chart with new simulation data
  * @param {number} startYear - Starting year for the chart
  * @param {Function} dataGenerator - Function that generates simulation data
  */
 function updateGrowthChart(startYear, dataGenerator) {
-    const { avg, p5, p95 } = dataGenerator();
+    const { avg, p5, p95, allSimulations } = dataGenerator();
     const ctx = document.getElementById('growthChart');
     if (!ctx) return;
 
@@ -255,6 +308,10 @@ function updateGrowthChart(startYear, dataGenerator) {
             }
         }
     });
+    
+    // Update results summary with chart data
+    const params = getRetirementParametersFromForm();
+    updateResultsSummary(params, { avg, allSimulations });
 }
 
 // Initialize chart on page load
