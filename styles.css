@@ -1,75 +1,56 @@
-/* Reusable form styles */
+/* Increase font sizes on mobile */
+@media (max-width: 1024px) {
+    body {
+        font-size: 32px;
+    }
 
-.form-row {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 0.5rem;
-  width: 100%;
-}
-@media (min-width: 480px) {
-  .form-row {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-  .form-label {
-    min-width: 260px;
-    max-width: 340px;
-    text-align: left; /* Left justify labels */
-    margin-right: 1.5rem;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: unset;
-  }
-  .form-input {
-    width: 18rem; /* Make inputs much wider */
-    min-width: 0;
-  }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: 48px;
+    }
+
+    label {
+        font-size: 32px;
+    }
+
+    input[type="number"],
+    input[type="range"],
+    button {
+        font-size: 32px;
+        padding: 12px !important;
+    }
 }
 
-.form-label {
-  font-size: 1.125=rem;
-  font-weight: 500;
-  color: #374151;
-  white-space: nowrap;
-  display: block;
-  text-align: left;
+html,
+body {
+    height: 100%;
 }
 
-.form-input {
-  border: 1px solid #d1d5db;
-  border-radius: 0.25rem;
-  padding: 0.5rem 1rem;
-  font-size: 1.125rem;
-  background-color: #fff;
-  color: #111827;
-  width: 100%;
-  outline: none;
-  transition: box-shadow 0.2s;
-  box-sizing: border-box;
-}
-.form-input:focus {
-  box-shadow: 0 0 0 2px #34d399;
+body {
+    display: flex;
+    flex-direction: column;
 }
 
-/* Prevent chart from overlapping form */
-.planner-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+footer {
+    margin-top: auto;
 }
-@media (min-width: 768px) {
-  .planner-sections {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 2rem;
-  }
-  .planner-form {
-    flex: 0 0 520px;
-    max-width: 600px;
-  }
-  .planner-chart {
-    flex: 1 1 0%;
-    min-width: 0;
-  }
+
+/* Gradient and Shadow Utility */
+.gradient-primary {
+    background: linear-gradient(to right, rgb(5, 150, 105), rgb(34, 197, 94), rgb(163, 230, 53));
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+/* Accordion Chevron Icon */
+.accordion-chevron {
+    width: 1rem;
+    height: 1rem;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
 }
