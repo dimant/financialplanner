@@ -146,6 +146,11 @@ function updateGrowthChart(startYear, dataGenerator) {
         growthChartInstance.destroy();
     }
     
+    const isMobile = window.innerWidth < 1024;
+    const legendFontSize = isMobile ? 20 : 12;
+    const tickFontSize = isMobile ? 16 : 11;
+    const titleFontSize = isMobile ? 20 : 12;
+    
     const years = Array.from({ length: avg.length }, (_, i) => startYear + i);
     growthChartInstance = new Chart(ctx, {
         type: 'line',
@@ -201,7 +206,7 @@ function updateGrowthChart(startYear, dataGenerator) {
                     position: 'top',
                     labels: {
                         font: {
-                            size: 12,
+                            size: legendFontSize,
                             weight: 'bold'
                         },
                         padding: 15,
@@ -220,14 +225,14 @@ function updateGrowthChart(startYear, dataGenerator) {
                             return '$' + value.toLocaleString();
                         },
                         font: {
-                            size: 11
+                            size: tickFontSize
                         }
                     },
                     title: {
                         display: true,
                         text: 'Portfolio Value ($)',
                         font: {
-                            size: 12,
+                            size: titleFontSize,
                             weight: 'bold'
                         }
                     }
@@ -237,13 +242,13 @@ function updateGrowthChart(startYear, dataGenerator) {
                         display: true,
                         text: 'Years',
                         font: {
-                            size: 12,
+                            size: titleFontSize,
                             weight: 'bold'
                         }
                     },
                     ticks: {
                         font: {
-                            size: 11
+                            size: tickFontSize
                         }
                     }
                 }
@@ -263,9 +268,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // Defer initial chart calculation to avoid blocking DOMContentLoaded
-    requestAnimationFrame(() => {
-        updateGrowthChart(startYear, dataGenerator);
-    });
+    updateGrowthChart(startYear, dataGenerator);
 
     // Hook up form submission to update chart
     const form = document.querySelector('form');
@@ -275,4 +278,43 @@ document.addEventListener('DOMContentLoaded', function() {
             updateGrowthChart(startYear, dataGenerator);
         });
     }
+
+    // Re-render chart on window resize for responsive fonts
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            updateGrowthChart(startYear, dataGenerator);
+        }, 300);
+    });
+
+    // Watch for drawer close events (when isOpen becomes false)
+    const bodyElement = document.querySelector('body');
+    const observer = new MutationObserver(() => {
+        const isOpen = bodyElement.getAttribute('x-data') ? 
+            eval(bodyElement.getAttribute('x-data').match(/isOpen:\s*(\w+)/)?.[1] || 'false') : false;
+        // Use Alpine's internal state to detect drawer close
+    });
+
+    // Simpler approach: listen for clicks on backdrop and close button, then update chart
+    document.addEventListener('click', function(e) {
+        let shouldUpdate = false;
+
+        // Check if click was on the backdrop (the overlay)
+        if (e.target.classList.contains('fixed') && e.target.classList.contains('inset-0')) {
+            shouldUpdate = true;
+        }
+
+        // Check if click was on the close button (X icon or its parent button)
+        const closeButton = e.target.closest('button[class*="p-2"][class*="rounded"][class*="lg:hidden"]');
+        if (closeButton?.querySelector('svg')) {
+            shouldUpdate = true;
+        }
+
+        if (shouldUpdate) {
+            requestAnimationFrame(() => {
+                updateGrowthChart(startYear, dataGenerator);
+            });
+        }
+    });
 });
