@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                         </div>
-                        <label x-ref="content" for="yearsUntilRetirement" class="block text-sm font-semibold cursor-help">Years Until Retirement <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                        <label x-ref="content" for="yearsUntilRetirement" class="block text-sm font-semibold cursor-help">Years to Retirement <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                     </div>
                     <input id="yearsUntilRetirement" type="number" min="0" max="100" value="15"
                         class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
@@ -101,7 +101,7 @@
                                 </div>
                             </div>
                         </div>
-                        <label x-ref="content" for="currentSavings" class="block text-sm font-semibold cursor-help">Current Savings <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                        <label x-ref="content" for="currentSavings" class="block text-sm font-semibold cursor-help">Savings Now <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                     </div>
                     <input id="currentSavings" type="number" min="0" step="100000" value="500000"
                         class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
@@ -118,12 +118,12 @@
                                 </div>
                             </div>
                         </div>
-                        <label x-ref="content" for="annualSavings" class="block text-sm font-semibold cursor-help">Annual Savings Until Retirement <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                        <label x-ref="content" for="annualSavings" class="block text-sm font-semibold cursor-help">Save per Year <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                     </div>
-                    <input id="annualSavings" type="number" min="0" step="1000" value="20000"
+                    <input id="annualSavings" type="number" min="0" step="1000" value="30000"
                         x-model.number="annualSavings"
                         class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
-                    <p class="text-sm text-gray-600 mt-2">$<span x-text="(annualSavings / 12).toLocaleString('en-US', {maximumFractionDigits: 0})">1,667</span>/month</p>
+                    <p class="text-lg text-gray-600 mt-2">$<span x-text="(annualSavings / 12).toLocaleString('en-US', {maximumFractionDigits: 0})">1,667</span>/month</p>
                 </div>
 
                 <!-- Years in Retirement -->
@@ -137,7 +137,7 @@
                                 </div>
                             </div>
                         </div>
-                        <label x-ref="content" for="retirementYears" class="block text-sm font-semibold cursor-help">Years in Retirement <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                        <label x-ref="content" for="retirementYears" class="block text-sm font-semibold cursor-help">Retirement Length <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                     </div>
                     <input id="retirementYears" type="number" min="0" max="100" value="30"
                         class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
@@ -154,7 +154,7 @@
                                 </div>
                             </div>
                         </div>
-                        <label x-ref="content" for="annualExpenses" class="block text-sm font-semibold cursor-help">Annual Expenses in Retirement <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                        <label x-ref="content" for="annualExpenses" class="block text-sm font-semibold cursor-help">Yearly Spending <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                     </div>
                     <input id="annualExpenses" type="number" min="0" step="10000" value="80000"
                         class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
@@ -186,9 +186,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <label x-ref="content" for="inflationRate" class="block text-sm font-semibold cursor-help">Inflation Rate (%) <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                                    <label x-ref="content" for="inflationRate" class="block text-sm font-semibold cursor-help">Inflation (%) <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                                 </div>
-                                <input id="inflationRate" type="number" min="0" max="100" step="0.1" value="2.5"
+                                <input id="inflationRate" type="number" min="0" max="100" step="0.1" value="2.0"
                                     class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
                             </div>
 
@@ -203,9 +203,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <label x-ref="content" for="retirementTaxRate" class="block text-sm font-semibold cursor-help">Retirement Tax Rate (%) <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                                    <label x-ref="content" for="retirementTaxRate" class="block text-sm font-semibold cursor-help">Tax Rate (%) <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                                 </div>
-                                <input id="retirementTaxRate" type="number" min="0" max="100" step="1" value="15"
+                                <input id="retirementTaxRate" type="number" min="0" max="100" step="1" value="12"
                                     class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
                             </div>
 
@@ -220,9 +220,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <label x-ref="content" for="meanReturn" class="block text-sm font-semibold cursor-help">Expected Annual Return Mean (%) <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                                    <label x-ref="content" for="meanReturn" class="block text-sm font-semibold cursor-help">Investment Return (%) <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                                 </div>
-                                <input id="meanReturn" type="number" min="0" max="100" step="0.5" value="6"
+                                <input id="meanReturn" type="number" min="0" max="100" step="0.5" value="7"
                                     class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
                             </div>
 
@@ -237,10 +237,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <label x-ref="content" for="standardDeviationReturn" class="block text-sm font-semibold cursor-help">Expected Annual Return Std Dev (0-1) <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                                    <label x-ref="content" for="standardDeviationReturn" class="block text-sm font-semibold cursor-help">Market Volatility (standard deviation)<span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                                 </div>
                                 <input id="standardDeviationReturn" type="number" min="0" max="1" step="0.001"
-                                    value="0.12"
+                                    value="0.10"
                                     class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
                             </div>
 
@@ -255,7 +255,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <label x-ref="content" for="numSimulations" class="block text-sm font-semibold cursor-help">Number of Simulations <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                                    <label x-ref="content" for="numSimulations" class="block text-sm font-semibold cursor-help">Accuracy (number of simulations)<span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                                 </div>
                                 <input id="numSimulations" type="number" min="1" max="100000" value="10000"
                                     class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
@@ -305,9 +305,8 @@
 
     <footer class="gradient-primary">
         <div class="container mx-auto text-center space-y-3 py-6">
-            <p class="font-medium text-white">&copy; 2025 Financial Planner. All rights reserved.</p>
-            <p class="text-sm text-white/90">
-                <a href="terms.html" class="underline hover:text-white transition">Terms of Use</a>
+            <p class="font-medium text-white">&copy; 2026 <a href="https://www.linkedin.com/in/dimantodorov/" class="underline hover:text-gray-200 transition">Diman Todorov</a> - All rights reserved. This tool is provided for educational purposes. See 
+                <a href="terms.html" class="underline hover:text-white transition">Terms of Use and Disclaimer</a>.
             </p>
         </div>
     </footer>

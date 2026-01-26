@@ -1,7 +1,7 @@
 /* Increase font sizes on mobile */
 @media (max-width: 1024px) {
     body {
-        font-size: 32px;
+        font-size: 24px;
     }
 
     h1,
@@ -10,17 +10,17 @@
     h4,
     h5,
     h6 {
-        font-size: 48px;
+        font-size: 24px;
     }
 
     label {
-        font-size: 32px;
+        font-size: 24px;
     }
 
     input[type="number"],
     input[type="range"],
     button {
-        font-size: 32px;
+        font-size: 24px;
         padding: 12px !important;
     }
 }

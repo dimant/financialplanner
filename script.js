@@ -6,7 +6,7 @@ let growthChartInstance = null;
  * @returns {Function} Function that returns random numbers between 0 and 1
  */
 function mulberry32(seed) {
-    return function() {
+    return function () {
         let t = seed += 0x6D2B79F5;
         t = Math.imul(t ^ t >>> 15, t | 1);
         t ^= t + Math.imul(t ^ t >>> 7, t | 61);
@@ -24,7 +24,7 @@ function makeNormalGenerator(mean, stddev) {
     let spare = null;
     const seed = Date.now() & 0xffffffff;
     const rng = mulberry32(seed);
-    return function() {
+    return function () {
         if (spare !== null) {
             const val = spare;
             spare = null;
@@ -141,16 +141,16 @@ function updateGrowthChart(startYear, dataGenerator) {
     const { avg, p5, p95 } = dataGenerator();
     const ctx = document.getElementById('growthChart');
     if (!ctx) return;
-    
+
     if (growthChartInstance) {
         growthChartInstance.destroy();
     }
-    
+
     const isMobile = window.innerWidth < 1024;
     const legendFontSize = isMobile ? 20 : 12;
     const tickFontSize = isMobile ? 16 : 11;
     const titleFontSize = isMobile ? 20 : 12;
-    
+
     const years = Array.from({ length: avg.length }, (_, i) => startYear + i);
     growthChartInstance = new Chart(ctx, {
         type: 'line',
@@ -221,7 +221,7 @@ function updateGrowthChart(startYear, dataGenerator) {
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        callback: function(value) {
+                        callback: function (value) {
                             return '$' + value.toLocaleString();
                         },
                         font: {
@@ -258,9 +258,9 @@ function updateGrowthChart(startYear, dataGenerator) {
 }
 
 // Initialize chart on page load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const startYear = new Date().getFullYear();
-    
+
     const dataGenerator = () => {
         const params = getRetirementParametersFromForm();
         const simulation = () => retirementSimulation(params, makeNormalGenerator(params.MeanReturn, params.StandardDeviationReturn));
@@ -273,9 +273,35 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hook up form submission to update chart
     const form = document.querySelector('form');
     if (form) {
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             e.preventDefault();
             updateGrowthChart(startYear, dataGenerator);
+        });
+
+        // Auto-update chart when any input changes (better for mobile)
+        const inputs = form.querySelectorAll('input[type="number"]');
+        inputs.forEach(input => {
+            input.addEventListener('change', function () {
+                updateGrowthChart(startYear, dataGenerator);
+                // Close drawer on mobile by clicking the close button
+                const closeBtn = document.querySelector(String.raw`nav button.lg\:hidden`); if (closeBtn) {
+                    closeBtn.click();
+                }
+            });
+        });
+    }
+
+    // Also add direct click handler to button for desktop
+    const submitBtn = document.querySelector('form button[type="submit"]');
+    if (submitBtn) {
+        submitBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            updateGrowthChart(startYear, dataGenerator);
+            // Close drawer on mobile
+            const closeBtn = document.querySelector(String.raw`nav button.lg\\:hidden`);
+            if (closeBtn) {
+                closeBtn.click();
+            }
         });
     }
 
@@ -288,16 +314,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
     });
 
-    // Watch for drawer close events (when isOpen becomes false)
-    const bodyElement = document.querySelector('body');
-    const observer = new MutationObserver(() => {
-        const isOpen = bodyElement.getAttribute('x-data') ? 
-            eval(bodyElement.getAttribute('x-data').match(/isOpen:\s*(\w+)/)?.[1] || 'false') : false;
-        // Use Alpine's internal state to detect drawer close
-    });
-
     // Simpler approach: listen for clicks on backdrop and close button, then update chart
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         let shouldUpdate = false;
 
         // Check if click was on the backdrop (the overlay)
