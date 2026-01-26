@@ -167,9 +167,9 @@ function updateResultsSummary(params, chartData) {
     } else if (successRate >= 80) {
         guidanceText = 'Your plan is on a good track. Most scenarios work out well, but consider increasing savings or adjusting spending to add more cushion.';
     } else if (successRate >= 60) {
-        guidanceText = 'Your plan has some risk. This doesn\'t mean it won\'t work—many retirees adapt their spending when markets dip. Consider ways to add flexibility: saving more now, working a bit longer, or having a plan to adjust spending when needed.';
+        guidanceText = 'Your plan has some risk. Consider saving more, working a bit longer, or planning to spend less in early retirement.';
     } else {
-        guidanceText = 'Your current plan faces challenges in many scenarios. This is an opportunity to explore options: increase savings, consider working a few more years, plan to spend less early on, or talk with a financial advisor about strategies tailored to your situation.';
+        guidanceText = 'Your current plan faces significant challenges. Consider increasing savings, adjusting retirement timing, or revisiting your spending goals with a financial advisor.';
     }
     
     document.getElementById('guidanceText').textContent = guidanceText;
@@ -199,10 +199,9 @@ function updateGrowthChart(startYear, dataGenerator) {
         growthChartInstance.destroy();
     }
 
-    const isMobile = window.innerWidth < 1024;
-    const legendFontSize = isMobile ? 20 : 12;
-    const tickFontSize = isMobile ? 16 : 11;
-    const titleFontSize = isMobile ? 20 : 12;
+    const legendFontSize = 12;
+    const tickFontSize = 11;
+    const titleFontSize = 12;
 
     const years = Array.from({ length: avg.length }, (_, i) => startYear + i);
     growthChartInstance = new Chart(ctx, {
@@ -341,7 +340,7 @@ document.addEventListener('DOMContentLoaded', function () {
             input.addEventListener('blur', function () {
                 updateGrowthChart(startYear, dataGenerator);
                 // Close drawer on mobile by clicking the close button
-                const closeBtn = document.querySelector('nav button.lg\\:hidden');
+                const closeBtn = document.querySelector('nav button[class*="lg:hidden"]');
                 if (closeBtn) {
                     closeBtn.click();
                 }
@@ -356,7 +355,7 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             updateGrowthChart(startYear, dataGenerator);
             // Close drawer on mobile
-            const closeBtn = document.querySelector('nav button.lg\\:hidden');
+            const closeBtn = document.querySelector('nav button[class*="lg:hidden"]');
             if (closeBtn) {
                 closeBtn.click();
             }
