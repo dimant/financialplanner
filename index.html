@@ -75,10 +75,10 @@
                 <!-- Basic Inputs -->
                 <!-- Years Until Retirement -->
                 <div>
-                    <div x-data="{ tooltipVisible: false, tooltipText: 'Number of years until you plan to retire', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                        <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-auto text-sm z-50 whitespace-nowrap" x-cloak>
+                    <div x-data="{ tooltipVisible: false, tooltipText: 'How many years until you want to stop working?', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
+                        <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-[calc(100%-20%)] text-sm z-50" x-cloak>
                             <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-nowrap"></p>
+                                <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
                                 <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
                                     <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
                                 </div>
@@ -92,10 +92,10 @@
 
                 <!-- Current Savings -->
                 <div>
-                    <div x-data="{ tooltipVisible: false, tooltipText: 'Total amount already saved for retirement', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                        <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-auto text-sm z-50 whitespace-nowrap" x-cloak>
+                    <div x-data="{ tooltipVisible: false, tooltipText: 'What you have saved today towards retirement (IRA, 401k, invesments, etc.)', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
+                        <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-[calc(100%-20%)] text-sm z-50" x-cloak>
                             <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-nowrap"></p>
+                                <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
                                 <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
                                     <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
                                 </div>
@@ -109,10 +109,10 @@
 
                 <!-- Annual Savings Until Retirement -->
                 <div x-data="{ annualSavings: 20000 }">
-                    <div x-data="{ tooltipVisible: false, tooltipText: 'Amount you save each year until retirement', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                        <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-auto text-sm z-50 whitespace-nowrap" x-cloak>
+                    <div x-data="{ tooltipVisible: false, tooltipText: 'How much you put toward retirement each year (IRA, 401k, invesments, etc.)', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
+                        <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-[calc(100%-20%)] text-sm z-50" x-cloak>
                             <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-nowrap"></p>
+                                <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
                                 <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
                                     <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
                                 </div>
@@ -128,10 +128,10 @@
 
                 <!-- Years in Retirement -->
                 <div>
-                    <div x-data="{ tooltipVisible: false, tooltipText: 'Expected number of years you will be retired', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                        <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-auto text-sm z-50 whitespace-nowrap" x-cloak>
+                    <div x-data="{ tooltipVisible: false, tooltipText: 'How long you expect retirement to last (to age 90, 95, etc.)', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
+                        <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-[calc(100%-20%)] text-sm z-50" x-cloak>
                             <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-nowrap"></p>
+                                <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
                                 <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
                                     <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
                                 </div>
@@ -145,10 +145,10 @@
 
                 <!-- Annual Expenses in Retirement -->
                 <div>
-                    <div x-data="{ tooltipVisible: false, tooltipText: 'Amount you plan to spend each year during retirement', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                        <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-auto text-sm z-50 whitespace-nowrap" x-cloak>
+                    <div x-data="{ tooltipVisible: false, tooltipText: 'Your annual budget in retirement (housing, food, travel, medical, etc.)', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
+                        <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-[calc(100%-20%)] text-sm z-50" x-cloak>
                             <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-nowrap"></p>
+                                <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
                                 <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
                                     <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
                                 </div>
@@ -176,11 +176,11 @@
                         <div x-show="activeAccordion=='advanced'" x-collapse x-cloak
                             class="space-y-4 p-3 bg-white border-t border-gray-300">
                             <!-- Inflation Rate -->
-                            <div>
-                                <div x-data="{ tooltipVisible: false, tooltipText: 'Annual percentage increase in living costs', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                                    <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-auto text-sm z-50 whitespace-nowrap" x-cloak>
+                            <div class="mt-4">
+                                <div x-data="{ tooltipVisible: false, tooltipText: 'How much prices typically go up each year (usually 2-3%)', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
+                                    <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-[calc(100%-20%)] text-sm z-50" x-cloak>
                                         <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                            <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-nowrap"></p>
+                                            <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
                                             <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
                                                 <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
                                             </div>
@@ -194,10 +194,10 @@
 
                             <!-- Retirement Tax Rate -->
                             <div>
-                                <div x-data="{ tooltipVisible: false, tooltipText: 'Tax rate applied to your retirement withdrawals', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                                    <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-auto text-sm z-50 whitespace-nowrap" x-cloak>
+                                <div x-data="{ tooltipVisible: false, tooltipText: 'Taxes you expect to pay on money withdrawn in retirement', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
+                                    <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-[calc(100%-20%)] text-sm z-50" x-cloak>
                                         <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                            <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-nowrap"></p>
+                                            <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
                                             <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
                                                 <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
                                             </div>
@@ -211,10 +211,10 @@
 
                             <!-- Expected Annual Return Mean -->
                             <div>
-                                <div x-data="{ tooltipVisible: false, tooltipText: 'Average annual return you expect from your investments', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                                    <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-auto text-sm z-50 whitespace-nowrap" x-cloak>
+                                <div x-data="{ tooltipVisible: false, tooltipText: 'Expected investment growth per year (stock market averages ~7%)', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
+                                    <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-[calc(100%-20%)] text-sm z-50" x-cloak>
                                         <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                            <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-nowrap"></p>
+                                            <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
                                             <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
                                                 <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
                                             </div>
@@ -228,10 +228,10 @@
 
                             <!-- Expected Annual Return Std Dev -->
                             <div>
-                                <div x-data="{ tooltipVisible: false, tooltipText: 'Volatility or variability of annual returns', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                                    <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-auto text-sm z-50 whitespace-nowrap" x-cloak>
+                                <div x-data="{ tooltipVisible: false, tooltipText: 'How much returns can swing up or down year to year', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
+                                    <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-[calc(100%-20%)] text-sm z-50" x-cloak>
                                         <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                            <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-nowrap"></p>
+                                            <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
                                             <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
                                                 <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
                                             </div>
@@ -246,10 +246,10 @@
 
                             <!-- Number of Simulations -->
                             <div>
-                                <div x-data="{ tooltipVisible: false, tooltipText: 'Higher numbers give more accurate results but take longer to calculate', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                                    <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-auto text-sm z-50 whitespace-nowrap" x-cloak>
+                                <div x-data="{ tooltipVisible: false, tooltipText: 'More runs = more accurate results (10,000 is usually fine)', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
+                                    <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute w-[calc(100%-20%)] text-sm z-50" x-cloak>
                                         <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                            <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-nowrap"></p>
+                                            <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
                                             <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
                                                 <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
                                             </div>
