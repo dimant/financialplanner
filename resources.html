@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Financial Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-gray-50">
+    <header class="bg-gradient-to-r from-emerald-700 via-teal-600 to-green-500">
+        <div class="container mx-auto px-4 py-6">
+            <h1 class="text-3xl font-extrabold text-white tracking-wide" style="font-family: 'Montserrat', sans-serif;">Financial Planner</h1>
+        </div>
+    </header>
+
+    <main class="flex-1 w-full p-4 lg:p-8">
+        <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-3xl font-bold mb-8 text-emerald-900" style="font-family: 'Montserrat', sans-serif;">Resources</h2>
+
+            <section class="space-y-6 text-gray-700">
+                <div>
+                    <h3 class="text-xl font-bold text-emerald-800 mb-3">Getting Started</h3>
+                    <p class="leading-relaxed">
+                        New to retirement planning? NerdWallet's comprehensive guide covers the fundamentals and helps you understand your options:
+                    </p>
+                    <p class="mt-3">
+                        <a href="https://www.nerdwallet.com/retirement/learn/how-to-save-for-retirement" target="_blank" class="text-emerald-600 hover:underline font-medium">NerdWallet: How to Save for Retirement →</a>
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-emerald-800 mb-3">Recommended Reading</h3>
+                    <ul class="space-y-2 leading-relaxed">
+                        <li><strong><a href="https://a.co/d/1yr557O" target="_blank" class="text-emerald-600 hover:underline font-medium">Your Money or Your Life →</a></strong> by Vicki Robin and Joe Dominguez. A classic on financial independence.</li>
+                        <li><strong><a href="https://a.co/d/0iw0F1k" target="_blank" class="text-emerald-600 hover:underline font-medium">A Random Walk Down Wall Street →</a></strong> by Burton Malkiel - Understanding market behavior and passive investing.</li>
+                        <li><strong><a href="https://a.co/d/1yr557O" target="_blank" class="text-emerald-600 hover:underline font-medium">The Bogleheads' Guide to Retirement Planning →</a></strong> by Taylor Larson, Mel Lindauer, and Laura F. Dogu, Richard A. Ferri, John C. Bogle. Practical, accessible investing advice.</li>
+                        <li><strong><a href="https://otexts.com/fpp3/" target="_blank" class="text-emerald-600 hover:underline font-medium">Forecasting: Principles and Practice →</a></strong> by Rob J Hyndman and George Athanasopoulos. A comprehensive guide to forecasting methods and applications.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-emerald-800 mb-3">Useful Tools & Websites</h3>
+                    <ul class="space-y-2 leading-relaxed">
+                        <li><strong><a href="https://www.consumerfinance.gov/consumer-tools/retirement/" target="_blank" class="text-emerald-600 hover:underline font-medium">Consumer Financial Protection Bureau Retirement Tools →</a></strong> Tools and resources for retirement planning from the CFPB.</li>
+                        <li><strong><a href="https://www.fidelity.com/calculators-tools/retirement-calculator/overview" target="_blank" class="text-emerald-600 hover:underline font-medium">Fidelity Retirement Calculator →</a></strong> Retirement calculators and resources from major investment firms.</li>
+                        <li><strong><a href="https://www.ssa.gov/retirement/plan-for-retirement" target="_blank" class="text-emerald-600 hover:underline font-medium">Social Security Administration →</a></strong> Estimate your Social Security benefits.</li>
+                        <li><strong><a href="https://www.irs.gov/retirement-plans" target="_blank" class="text-emerald-600 hover:underline font-medium">IRS Website (irs.gov) →</a></strong> Information on retirement account contribution limits and tax rules.</li>
+                        <li><strong><a href="https://www.reddit.com/r/financialindependence/wiki/faq/" target="_blank" class="text-emerald-600 hover:underline font-medium">r/financialindependence FAQ →</a></strong> The r/financialindependence FAQ discusses strategies which can help you achieve financial independence and early retirement.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-emerald-800 mb-3">How This Calculator Works</h3>
+                    <p class="leading-relaxed mb-3">
+                        This retirement simulator uses <strong>Monte Carlo simulations</strong> to model thousands of possible retirement scenarios. Here's what happens under the hood:
+                    </p>
+                    <ul class="space-y-2 leading-relaxed">
+                        <li><strong>Accumulation Phase:</strong> The calculator projects how your savings grow from today until retirement, accounting for your current savings, annual contributions, and expected investment returns.</li>
+                        <li><strong>Monte Carlo Approach:</strong> Instead of predicting one outcome, the simulator runs 10,000+ scenarios with varying annual returns based on historical market volatility. Each year, returns randomly fluctuate around your expected average.</li>
+                        <li><strong>Retirement Phase:</strong> Once retired, the calculator models your withdrawals adjusted for inflation and taxes, seeing whether your portfolio lasts through your retirement years.</li>
+                        <li><strong>Results:</strong> You get three key projections: the average (mean) outcome, the 5th percentile (pessimistic but possible), and the 95th percentile (optimistic). The "success rate" shows what percentage of scenarios never run out of money.</li>
+                    </ul>
+                    <p class="mt-3 text-sm text-gray-600 italic">
+                        Note: This calculator cannot predict the future. It's based on historical patterns and your assumptions. Real retirement depends on actual market returns, your spending flexibility, and unexpected life events.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-emerald-800 mb-3">Getting Professional Help</h3>
+                    <p class="leading-relaxed">
+                        While this tool provides valuable insights, working with a qualified financial advisor can help you create a personalized plan. Look for advisors who are fiduciaries (legally obligated to act in your best interest) and consider fee-only advisors to avoid conflicts of interest. A CFP (Certified Financial Planner) designation is a good credential to look for.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-emerald-800 mb-3">Common Mistakes to Avoid</h3>
+                    <ul class="space-y-2 leading-relaxed">
+                        <li>Trying to time the market instead of staying invested for the long term.</li>
+                        <li>Underestimating how long you'll live and healthcare costs.</li>
+                        <li>Not accounting for inflation in your retirement projections.</li>
+                        <li>Paying unnecessary fees on investments and accounts.</li>
+                        <li>Ignoring the impact of spending flexibility and lifestyle adjustments.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <div class="mt-8 pt-8 border-t border-gray-200">
+                <a href="index.html" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2 rounded transition">
+                    Back to Planner
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gradient-to-r from-emerald-700 via-teal-600 to-green-500 mt-12">
+        <div class="container mx-auto text-center py-6">
+            <p class="font-medium text-white">&copy; 2026 Financial Planner. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

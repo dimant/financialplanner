@@ -38,15 +38,21 @@
 
 <body x-cloak x-data="{ isOpen: false }" class="flex flex-col h-screen" @keydown.escape.window="isOpen = false">
     <header class="gradient-primary">
-        <div class="container flex items-center px-4 drop-shadow-lg">
-            <button class="px-2 text-gray-300 transition duration-200 hover:text-white focus:outline-none lg:hidden"
-                @click="isOpen = true">
-                <svg class="h-7 w-7 sm:h-12 sm:w-12">
-                    <use href="#sliders"></use>
-                </svg>
-            </button>
-            <h1 class="text-3xl font-extrabold text-white tracking-wide" style="font-family: 'Montserrat', sans-serif;">
-                Retirement Simulator</h1>
+        <div class="container flex items-center justify-between px-4 drop-shadow-lg">
+            <div class="flex items-center">
+                <button class="px-2 text-gray-300 transition duration-200 hover:text-white focus:outline-none lg:hidden"
+                    @click="isOpen = true">
+                    <svg class="h-7 w-7 sm:h-12 sm:w-12">
+                        <use href="#sliders"></use>
+                    </svg>
+                </button>
+                <h1 class="text-3xl font-extrabold text-white tracking-wide" style="font-family: 'Montserrat', sans-serif;">
+                    Retirement Simulator</h1>
+            </div>
+            <nav class="hidden lg:flex items-center gap-6 text-sm">
+                <a href="resources.html" class="text-lg text-white hover:text-gray-200 transition underline">Resources</a>
+                <a href="terms.html" class="text-lg text-white hover:text-gray-200 transition underline">Terms & Disclaimer</a>
+            </nav>
         </div>
     </header>
 
@@ -298,9 +304,6 @@
                     <p class="text-lg text-emerald-700 leading-relaxed">
                         <strong>How it works:</strong> Enter your current savings, how much you plan to save each year, and what you expect to spend in retirement. We show you what different market scenarios could mean for your portfolio, so you can make decisions with more confidence.
                     </p>
-                    <p class="text-sm text-emerald-600 mt-6">
-                        <a href="terms.html" class="underline hover:text-emerald-700 transition">Terms of Use and Disclaimer</a>
-                    </p>
                 </div>
             </div>
 
@@ -393,10 +396,8 @@
     </div>
 
     <footer class="gradient-primary">
-        <div class="container mx-auto text-center space-y-3 py-6">
-            <p class="font-medium text-white">&copy; 2026 <a href="https://www.linkedin.com/in/dimantodorov/" class="underline hover:text-gray-200 transition">Diman Todorov</a> - All rights reserved. This tool is provided for educational purposes. See 
-                <a href="terms.html" class="underline hover:text-white transition">Terms of Use and Disclaimer</a>.
-            </p>
+        <div class="container mx-auto text-center py-6">
+            <p class="font-medium text-white">&copy; 2026 <a href="https://www.linkedin.com/in/dimantodorov/" class="underline hover:text-gray-200 transition">Diman Todorov</a> - All rights reserved. This tool is provided for educational purposes. <a href="terms.html" class="text-lg text-white hover:text-gray-200 transition underline">Terms & Disclaimer</a></p>
         </div>
     </footer>
 </body>
