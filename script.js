@@ -167,9 +167,9 @@ function updateResultsSummary(params, chartData) {
     } else if (successRate >= 80) {
         guidanceText = 'Your plan is on a good track. Most scenarios work out well, but consider increasing savings or adjusting spending to add more cushion.';
     } else if (successRate >= 60) {
-        guidanceText = 'Your plan has some risk. Consider saving more, working a bit longer, or planning to spend less in early retirement.';
+        guidanceText = 'Your plan has some risk. This doesn\'t mean it won\'t work—many retirees adapt their spending when markets dip. Consider ways to add flexibility: saving more now, working a bit longer, or having a plan to adjust spending when needed.';
     } else {
-        guidanceText = 'Your current plan faces significant challenges. Consider increasing savings, adjusting retirement timing, or revisiting your spending goals with a financial advisor.';
+        guidanceText = 'Your current plan faces challenges in many scenarios. This is an opportunity to explore options: increase savings, consider working a few more years, plan to spend less early on, or talk with a financial advisor about strategies tailored to your situation.';
     }
     
     document.getElementById('guidanceText').textContent = guidanceText;
