@@ -49,7 +49,7 @@
                 <h1 class="text-3xl font-extrabold text-white tracking-wide" style="font-family: 'Montserrat', sans-serif;">
                     Retirement Simulator</h1>
             </div>
-            <nav class="hidden lg:flex items-center gap-6 text-sm">
+            <nav aria-label="Primary" class="hidden lg:flex items-center gap-6 text-sm">
                 <a href="resources.html" class="text-lg text-white hover:text-gray-200 transition underline">Resources</a>
                 <a href="terms.html" class="text-lg text-white hover:text-gray-200 transition underline">Terms & Disclaimer</a>
             </nav>
@@ -63,6 +63,7 @@
         </div>
 
         <nav x-cloak
+            aria-label="Primary"
             class="fixed left-0 top-0 h-screen lg:relative lg:h-auto w-[90%] lg:w-96 z-20 p-4 bg-gray-200 text-gray-600 transition-transform duration-300 overflow-y-auto lg:overflow-y-visible -translate-x-full lg:translate-x-0"
             :class="{'translate-x-0': isOpen, '-translate-x-full': !isOpen}">
 
