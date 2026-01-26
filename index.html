@@ -35,7 +35,7 @@
 
 <body x-cloak x-data="{ isOpen: false }" class="flex flex-col h-screen" @keydown.escape.window="isOpen = false">
     <header class="gradient-primary">
-        <div class="container flex px-4 drop-shadow-lg">
+        <div class="container flex items-center px-4 drop-shadow-lg">
             <button class="px-2 text-gray-300 transition duration-200 hover:text-white focus:outline-none lg:hidden"
                 @click="isOpen = true">
                 <svg class="h-7 w-7 sm:h-12 sm:w-12">
@@ -257,7 +257,7 @@
                                     </div>
                                     <label x-ref="content" for="numSimulations" class="block text-sm font-semibold cursor-help">Accuracy (number of simulations)<span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                                 </div>
-                                <input id="numSimulations" type="number" min="1" max="1000000" value="100000"
+                                <input id="numSimulations" type="number" min="1" max="100000" value="100000"
                                     class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
                             </div>
                         </div>
