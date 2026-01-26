@@ -335,13 +335,14 @@ document.addEventListener('DOMContentLoaded', function () {
             updateGrowthChart(startYear, dataGenerator);
         });
 
-        // Auto-update chart when any input changes (better for mobile)
+        // Update chart when inputs lose focus (blur event)
         const inputs = form.querySelectorAll('input[type="number"]');
         inputs.forEach(input => {
-            input.addEventListener('change', function () {
+            input.addEventListener('blur', function () {
                 updateGrowthChart(startYear, dataGenerator);
                 // Close drawer on mobile by clicking the close button
-                const closeBtn = document.querySelector(String.raw`nav button.lg\:hidden`); if (closeBtn) {
+                const closeBtn = document.querySelector('nav button.lg\\:hidden');
+                if (closeBtn) {
                     closeBtn.click();
                 }
             });
@@ -355,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             updateGrowthChart(startYear, dataGenerator);
             // Close drawer on mobile
-            const closeBtn = document.querySelector(String.raw`nav button.lg\\:hidden`);
+            const closeBtn = document.querySelector('nav button.lg\\:hidden');
             if (closeBtn) {
                 closeBtn.click();
             }
