@@ -123,7 +123,7 @@
                     <input id="annualSavings" type="number" min="0" step="1000" value="20000"
                         x-model.number="annualSavings"
                         class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
-                    <p class="text-base sm:text-lg text-gray-600 mt-2 font-medium">$<span x-text="(annualSavings / 12).toLocaleString('en-US', {maximumFractionDigits: 0})">1,667</span>/month</p>
+                    <p class="text-sm text-gray-600 mt-2">$<span x-text="(annualSavings / 12).toLocaleString('en-US', {maximumFractionDigits: 0})">1,667</span>/month</p>
                 </div>
 
                 <!-- Years in Retirement -->
@@ -272,8 +272,30 @@
 
         <!-- Main content area -->
         <div class="flex-1 w-full p-4 lg:p-8 overflow-y-auto">
+            <!-- Hero Section -->
+            <div x-data="{ heroOpen: true }" class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg shadow mb-8 border border-emerald-100">
+                <button @click="heroOpen = !heroOpen" class="w-full flex items-center justify-between p-8 text-left hover:bg-emerald-100/30 transition">
+                    <h2 class="text-3xl lg:text-4xl font-bold text-emerald-900" style="font-family: 'Montserrat', sans-serif;">Your Retirement Journey</h2>
+                    <svg class="w-6 h-6 text-emerald-900 flex-shrink-0 ml-4 transition-transform duration-200" :class="{ 'rotate-180': !heroOpen }" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                <div x-show="heroOpen" x-transition class="px-8 pb-8 space-y-4">
+                    <p class="text-xl sm:text-2xl text-emerald-800 leading-relaxed">
+                        Retirement planning is a lot to think about. This tool simulates thousands of possible futures based on your savings, contributions, and expected spending to show you a realistic range of outcomes.
+                    </p>
+                    <p class="text-xl sm:text-2xl text-emerald-700 leading-relaxed">
+                        <strong>How it works:</strong> Enter your current savings, how much you plan to save each year, and what you expect to spend in retirement. We show you what different market scenarios could mean for your portfolio, so you can make decisions with more confidence.
+                    </p>
+                    <p class="text-sm text-emerald-600 mt-6">
+                        <a href="terms.html" class="underline hover:text-emerald-700 transition">Terms of Use and Disclaimer</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Chart Section -->
             <div class="bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-2xl font-bold mb-6 text-emerald-700" style="font-family: 'Montserrat', sans-serif;">Asset Growth Chart</h2>
+                <h2 class="text-2xl font-bold mb-6 text-emerald-700" style="font-family: 'Montserrat', sans-serif;">Outlook</h2>
                 <div class="relative w-full aspect-[16/9] bg-gray-50 rounded border border-gray-200">
                     <canvas id="growthChart" class="absolute inset-0 w-full h-full"></canvas>
                 </div>
@@ -282,8 +304,11 @@
     </div>
 
     <footer class="gradient-primary">
-        <div class="container mx-auto text-center">
+        <div class="container mx-auto text-center space-y-3 py-6">
             <p class="font-medium text-white">&copy; 2025 Financial Planner. All rights reserved.</p>
+            <p class="text-sm text-white/90">
+                <a href="terms.html" class="underline hover:text-white transition">Terms of Use</a>
+            </p>
         </div>
     </footer>
 </body>
