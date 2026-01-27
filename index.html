@@ -398,7 +398,7 @@
                     class="w-full flex items-center justify-between p-8 text-left hover:bg-emerald-100/30 transition">
                     <h2 class="text-3xl font-bold text-emerald-900" style="font-family: 'Montserrat', sans-serif;">Your
                         Retirement Journey</h2>
-                    <svg class="w-6 h-6 text-emerald-900 flex-shrink-0 ml-4 transition-transform duration-200"
+                    <svg class="w-8 h-8 text-emerald-600 flex-shrink-0 ml-4 transition-transform duration-200 p-1 bg-emerald-100 rounded-lg hover:bg-emerald-200"
                         :class="{ 'rotate-180': !heroOpen }" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
@@ -442,19 +442,13 @@
 
                 <!-- Results Summary Section -->
                 <div class="flex-1 lg:flex-[2]">
-                    <div x-data="{ summaryOpen: true }"
-                        class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg shadow border border-emerald-100 h-full">
-                        <button @click="summaryOpen = !summaryOpen"
-                            class="w-full flex items-center justify-between p-6 text-left hover:bg-emerald-100/30 transition">
+                    <div
+                        class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg shadow border border-emerald-100 h-full flex flex-col">
+                        <div class="px-6 py-5 border-b border-emerald-200">
                             <h2 class="text-2xl font-bold text-emerald-900"
                                 style="font-family: 'Montserrat', sans-serif;">What This Means</h2>
-                            <svg class="w-6 h-6 text-emerald-900 flex-shrink-0 transition-transform duration-200"
-                                :class="{ 'rotate-180': !summaryOpen }" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
-                        <div x-show="summaryOpen" x-transition class="px-6 pb-6 space-y-6">
+                        </div>
+                        <div x-transition class="px-6 py-6 space-y-6 flex-1">
                             <!-- Key Metrics -->
                             <div class="grid grid-cols-2 gap-4">
                                 <div class="bg-white rounded-lg p-4 shadow-sm">
@@ -579,16 +573,18 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <footer class="gradient-primary">
-                <div class="container mx-auto text-center py-6">
-                    <p class="font-medium text-white">&copy; 2026 <a href="https://www.linkedin.com/in/dimantodorov/"
-                            class="underline hover:text-gray-200 transition">Diman Todorov</a> - All rights reserved.
-                        This tool is provided for educational purposes. <a href="terms.html"
-                            class="text-lg text-white hover:text-gray-200 transition underline">Terms & Disclaimer</a>
-                    </p>
-                </div>
-            </footer>
+    <footer class="gradient-primary">
+        <div class="container mx-auto text-center py-6">
+            <p class="font-medium text-white">&copy; 2026 <a href="https://www.linkedin.com/in/dimantodorov/"
+                    class="underline hover:text-gray-200 transition">Diman Todorov</a> - All rights reserved.
+                This tool is provided for educational purposes. <a href="terms.html"
+                    class="text-lg text-white hover:text-gray-200 transition underline">Terms & Disclaimer</a>
+            </p>
+        </div>
+    </footer>
 </body>
 <script src="script.js"></script>
 
