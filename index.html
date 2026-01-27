@@ -46,12 +46,14 @@
                         <use href="#sliders"></use>
                     </svg>
                 </button>
-                <h1 class="text-3xl font-extrabold text-white tracking-wide" style="font-family: 'Montserrat', sans-serif;">
+                <h1 class="text-3xl font-extrabold text-white tracking-wide"
+                    style="font-family: 'Montserrat', sans-serif;">
                     Retirement Simulator</h1>
             </div>
-            <nav aria-label="Primary" class="hidden lg:flex items-center gap-6 text-sm">
-                <a href="resources.html" class="text-lg text-white hover:text-gray-200 transition underline">Resources</a>
-                <a href="terms.html" class="text-lg text-white hover:text-gray-200 transition underline">Terms & Disclaimer</a>
+            <nav aria-label="Primary" class="hidden lg:flex items-center gap-3 text-sm">
+                <a href="resources.html"
+                    class="px-5 py-2.5 bg-white text-emerald-700 font-bold rounded-lg hover:bg-gray-100 shadow-lg transition">Resources</a>
+                <a href="terms.html" class="px-5 py-2.5 bg-white text-emerald-700 font-bold rounded-lg hover:bg-gray-100 shadow-lg transition">Terms & Disclaimer</a>
             </nav>
         </div>
     </header>
@@ -62,8 +64,7 @@
             style="display: none;">
         </div>
 
-        <nav x-cloak
-            aria-label="Primary"
+        <nav x-cloak aria-label="Primary"
             class="fixed left-0 top-0 h-screen lg:relative lg:h-auto w-[90%] lg:w-96 z-20 p-4 bg-gray-200 text-gray-600 transition-transform duration-300 overflow-y-auto lg:overflow-y-visible -translate-x-full lg:translate-x-0"
             :class="{'translate-x-0': isOpen, '-translate-x-full': !isOpen}">
 
@@ -85,16 +86,24 @@
                 <!-- Basic Inputs -->
                 <!-- Years Until Retirement -->
                 <div>
-                    <div x-data="{ tooltipVisible: false, tooltipText: 'How many years until you want to stop working?', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                        <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute min-w-56 text-sm z-50" x-cloak>
-                            <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
+                    <div x-data="{ tooltipVisible: false, tooltipText: 'How many years until you want to stop working?', tooltipPosition: 'top' }"
+                        x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });"
+                        class="relative inline-block mb-2">
+                        <div x-ref="tooltip" x-show="tooltipVisible"
+                            :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }"
+                            class="absolute min-w-56 text-sm z-50" x-cloak>
+                            <div x-show="tooltipVisible" x-transition
+                                class="relative px-2 py-1 text-white rounded bg-black/90">
                                 <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
-                                <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
+                                <div
+                                    class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
                                     <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
                                 </div>
                             </div>
                         </div>
-                        <label x-ref="content" for="yearsUntilRetirement" class="block text-sm font-semibold cursor-help">Years to Retirement <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                        <label x-ref="content" for="yearsUntilRetirement"
+                            class="block text-sm font-semibold cursor-help">Years to Retirement <span
+                                class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                     </div>
                     <input id="yearsUntilRetirement" type="number" min="0" max="100" value="15"
                         class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
@@ -102,16 +111,24 @@
 
                 <!-- Current Savings -->
                 <div>
-                    <div x-data="{ tooltipVisible: false, tooltipText: 'What you have saved today towards retirement (IRA, 401k, invesments, etc.)', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                        <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute min-w-56 text-sm z-50" x-cloak>
-                            <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
+                    <div x-data="{ tooltipVisible: false, tooltipText: 'What you have saved today towards retirement (IRA, 401k, invesments, etc.)', tooltipPosition: 'top' }"
+                        x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });"
+                        class="relative inline-block mb-2">
+                        <div x-ref="tooltip" x-show="tooltipVisible"
+                            :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }"
+                            class="absolute min-w-56 text-sm z-50" x-cloak>
+                            <div x-show="tooltipVisible" x-transition
+                                class="relative px-2 py-1 text-white rounded bg-black/90">
                                 <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
-                                <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
+                                <div
+                                    class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
                                     <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
                                 </div>
                             </div>
                         </div>
-                        <label x-ref="content" for="currentSavings" class="block text-sm font-semibold cursor-help">Savings Now <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                        <label x-ref="content" for="currentSavings"
+                            class="block text-sm font-semibold cursor-help">Savings Now <span
+                                class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                     </div>
                     <input id="currentSavings" type="number" min="0" step="100000" value="500000"
                         class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
@@ -119,35 +136,53 @@
 
                 <!-- Annual Savings Until Retirement -->
                 <div x-data="{ annualSavings: 20000 }">
-                    <div x-data="{ tooltipVisible: false, tooltipText: 'How much you put toward retirement each year (IRA, 401k, invesments, etc.)', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                        <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute min-w-56 text-sm z-50" x-cloak>
-                            <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
+                    <div x-data="{ tooltipVisible: false, tooltipText: 'How much you put toward retirement each year (IRA, 401k, invesments, etc.)', tooltipPosition: 'top' }"
+                        x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });"
+                        class="relative inline-block mb-2">
+                        <div x-ref="tooltip" x-show="tooltipVisible"
+                            :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }"
+                            class="absolute min-w-56 text-sm z-50" x-cloak>
+                            <div x-show="tooltipVisible" x-transition
+                                class="relative px-2 py-1 text-white rounded bg-black/90">
                                 <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
-                                <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
+                                <div
+                                    class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
                                     <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
                                 </div>
                             </div>
                         </div>
-                        <label x-ref="content" for="annualSavings" class="block text-sm font-semibold cursor-help">Save per Year <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                        <label x-ref="content" for="annualSavings" class="block text-sm font-semibold cursor-help">Save
+                            per Year <span
+                                class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                     </div>
                     <input id="annualSavings" type="number" min="0" step="1000" value="30000"
                         x-model.number="annualSavings"
                         class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
-                    <p class="text-lg text-gray-600 mt-2">$<span x-text="(annualSavings / 12).toLocaleString('en-US', {maximumFractionDigits: 0})">1,667</span>/month</p>
+                    <p class="text-lg text-gray-600 mt-2">$<span
+                            x-text="(annualSavings / 12).toLocaleString('en-US', {maximumFractionDigits: 0})">1,667</span>/month
+                    </p>
                 </div>
 
                 <!-- Years in Retirement -->
                 <div>
-                    <div x-data="{ tooltipVisible: false, tooltipText: 'How long you expect retirement to last (to age 90, 95, etc.)', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                        <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute min-w-56 text-sm z-50" x-cloak>
-                            <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
+                    <div x-data="{ tooltipVisible: false, tooltipText: 'How long you expect retirement to last (to age 90, 95, etc.)', tooltipPosition: 'top' }"
+                        x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });"
+                        class="relative inline-block mb-2">
+                        <div x-ref="tooltip" x-show="tooltipVisible"
+                            :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }"
+                            class="absolute min-w-56 text-sm z-50" x-cloak>
+                            <div x-show="tooltipVisible" x-transition
+                                class="relative px-2 py-1 text-white rounded bg-black/90">
                                 <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
-                                <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
+                                <div
+                                    class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
                                     <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
                                 </div>
                             </div>
                         </div>
-                        <label x-ref="content" for="retirementYears" class="block text-sm font-semibold cursor-help">Retirement Length <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                        <label x-ref="content" for="retirementYears"
+                            class="block text-sm font-semibold cursor-help">Retirement Length <span
+                                class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                     </div>
                     <input id="retirementYears" type="number" min="0" max="100" value="30"
                         class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
@@ -155,16 +190,24 @@
 
                 <!-- Annual Expenses in Retirement -->
                 <div>
-                    <div x-data="{ tooltipVisible: false, tooltipText: 'Your annual budget in retirement (housing, food, travel, medical, etc.)', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                        <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute min-w-56 text-sm z-50" x-cloak>
-                            <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
+                    <div x-data="{ tooltipVisible: false, tooltipText: 'Your annual budget in retirement (housing, food, travel, medical, etc.)', tooltipPosition: 'top' }"
+                        x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });"
+                        class="relative inline-block mb-2">
+                        <div x-ref="tooltip" x-show="tooltipVisible"
+                            :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }"
+                            class="absolute min-w-56 text-sm z-50" x-cloak>
+                            <div x-show="tooltipVisible" x-transition
+                                class="relative px-2 py-1 text-white rounded bg-black/90">
                                 <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
-                                <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
+                                <div
+                                    class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
                                     <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
                                 </div>
                             </div>
                         </div>
-                        <label x-ref="content" for="annualExpenses" class="block text-sm font-semibold cursor-help">Yearly Spending <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                        <label x-ref="content" for="annualExpenses"
+                            class="block text-sm font-semibold cursor-help">Yearly Spending <span
+                                class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                     </div>
                     <input id="annualExpenses" type="number" min="0" step="10000" value="80000"
                         class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
@@ -187,16 +230,27 @@
                             class="space-y-4 p-3 bg-white border-t border-gray-300">
                             <!-- Inflation Rate -->
                             <div class="mt-4">
-                                <div x-data="{ tooltipVisible: false, tooltipText: 'How much prices typically go up each year (usually 2-3%)', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                                    <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute min-w-56 text-sm z-50" x-cloak>
-                                        <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                            <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
-                                            <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
-                                                <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
+                                <div x-data="{ tooltipVisible: false, tooltipText: 'How much prices typically go up each year (usually 2-3%)', tooltipPosition: 'top' }"
+                                    x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });"
+                                    class="relative inline-block mb-2">
+                                    <div x-ref="tooltip" x-show="tooltipVisible"
+                                        :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }"
+                                        class="absolute min-w-56 text-sm z-50" x-cloak>
+                                        <div x-show="tooltipVisible" x-transition
+                                            class="relative px-2 py-1 text-white rounded bg-black/90">
+                                            <p x-text="tooltipText"
+                                                class="block flex-shrink-0 text-xs whitespace-normal"></p>
+                                            <div
+                                                class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
+                                                <div
+                                                    class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <label x-ref="content" for="inflationRate" class="block text-sm font-semibold cursor-help">Inflation (%) <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                                    <label x-ref="content" for="inflationRate"
+                                        class="block text-sm font-semibold cursor-help">Inflation (%) <span
+                                            class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                                 </div>
                                 <input id="inflationRate" type="number" min="0" max="100" step="0.1" value="2.0"
                                     class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
@@ -204,16 +258,27 @@
 
                             <!-- Retirement Tax Rate -->
                             <div>
-                                <div x-data="{ tooltipVisible: false, tooltipText: 'Taxes you expect to pay on money withdrawn in retirement', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                                    <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute min-w-56 text-sm z-50" x-cloak>
-                                        <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                            <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
-                                            <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
-                                                <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
+                                <div x-data="{ tooltipVisible: false, tooltipText: 'Taxes you expect to pay on money withdrawn in retirement', tooltipPosition: 'top' }"
+                                    x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });"
+                                    class="relative inline-block mb-2">
+                                    <div x-ref="tooltip" x-show="tooltipVisible"
+                                        :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }"
+                                        class="absolute min-w-56 text-sm z-50" x-cloak>
+                                        <div x-show="tooltipVisible" x-transition
+                                            class="relative px-2 py-1 text-white rounded bg-black/90">
+                                            <p x-text="tooltipText"
+                                                class="block flex-shrink-0 text-xs whitespace-normal"></p>
+                                            <div
+                                                class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
+                                                <div
+                                                    class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <label x-ref="content" for="retirementTaxRate" class="block text-sm font-semibold cursor-help">Tax Rate (%) <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                                    <label x-ref="content" for="retirementTaxRate"
+                                        class="block text-sm font-semibold cursor-help">Tax Rate (%) <span
+                                            class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                                 </div>
                                 <input id="retirementTaxRate" type="number" min="0" max="100" step="1" value="12"
                                     class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
@@ -221,16 +286,27 @@
 
                             <!-- Expected Annual Return Mean -->
                             <div>
-                                <div x-data="{ tooltipVisible: false, tooltipText: 'Expected investment growth per year (stock market averages ~7%)', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                                    <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute min-w-56 text-sm z-50" x-cloak>
-                                        <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                            <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
-                                            <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
-                                                <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
+                                <div x-data="{ tooltipVisible: false, tooltipText: 'Expected investment growth per year (stock market averages ~7%)', tooltipPosition: 'top' }"
+                                    x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });"
+                                    class="relative inline-block mb-2">
+                                    <div x-ref="tooltip" x-show="tooltipVisible"
+                                        :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }"
+                                        class="absolute min-w-56 text-sm z-50" x-cloak>
+                                        <div x-show="tooltipVisible" x-transition
+                                            class="relative px-2 py-1 text-white rounded bg-black/90">
+                                            <p x-text="tooltipText"
+                                                class="block flex-shrink-0 text-xs whitespace-normal"></p>
+                                            <div
+                                                class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
+                                                <div
+                                                    class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <label x-ref="content" for="meanReturn" class="block text-sm font-semibold cursor-help">Investment Return (%) <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                                    <label x-ref="content" for="meanReturn"
+                                        class="block text-sm font-semibold cursor-help">Investment Return (%) <span
+                                            class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                                 </div>
                                 <input id="meanReturn" type="number" min="0" max="100" step="0.5" value="7"
                                     class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
@@ -238,16 +314,28 @@
 
                             <!-- Expected Annual Return Std Dev -->
                             <div>
-                                <div x-data="{ tooltipVisible: false, tooltipText: 'How much returns can swing up or down year to year', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                                    <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute min-w-56 text-sm z-50" x-cloak>
-                                        <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                            <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
-                                            <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
-                                                <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
+                                <div x-data="{ tooltipVisible: false, tooltipText: 'How much returns can swing up or down year to year', tooltipPosition: 'top' }"
+                                    x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });"
+                                    class="relative inline-block mb-2">
+                                    <div x-ref="tooltip" x-show="tooltipVisible"
+                                        :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }"
+                                        class="absolute min-w-56 text-sm z-50" x-cloak>
+                                        <div x-show="tooltipVisible" x-transition
+                                            class="relative px-2 py-1 text-white rounded bg-black/90">
+                                            <p x-text="tooltipText"
+                                                class="block flex-shrink-0 text-xs whitespace-normal"></p>
+                                            <div
+                                                class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
+                                                <div
+                                                    class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <label x-ref="content" for="standardDeviationReturn" class="block text-sm font-semibold cursor-help">Market Volatility (standard deviation)<span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                                    <label x-ref="content" for="standardDeviationReturn"
+                                        class="block text-sm font-semibold cursor-help">Market Volatility (standard
+                                        deviation)<span
+                                            class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                                 </div>
                                 <input id="standardDeviationReturn" type="number" min="0" max="1" step="0.001"
                                     value="0.10"
@@ -256,16 +344,28 @@
 
                             <!-- Number of Simulations -->
                             <div>
-                                <div x-data="{ tooltipVisible: false, tooltipText: 'More runs = more accurate results (10,000 is usually fine)', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                                    <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute min-w-56 text-sm z-50" x-cloak>
-                                        <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                            <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
-                                            <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
-                                                <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
+                                <div x-data="{ tooltipVisible: false, tooltipText: 'More runs = more accurate results (10,000 is usually fine)', tooltipPosition: 'top' }"
+                                    x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });"
+                                    class="relative inline-block mb-2">
+                                    <div x-ref="tooltip" x-show="tooltipVisible"
+                                        :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }"
+                                        class="absolute min-w-56 text-sm z-50" x-cloak>
+                                        <div x-show="tooltipVisible" x-transition
+                                            class="relative px-2 py-1 text-white rounded bg-black/90">
+                                            <p x-text="tooltipText"
+                                                class="block flex-shrink-0 text-xs whitespace-normal"></p>
+                                            <div
+                                                class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
+                                                <div
+                                                    class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <label x-ref="content" for="numSimulations" class="block text-sm font-semibold cursor-help">Accuracy (number of simulations)<span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
+                                    <label x-ref="content" for="numSimulations"
+                                        class="block text-sm font-semibold cursor-help">Accuracy (number of
+                                        simulations)<span
+                                            class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold ml-1">i</span></label>
                                 </div>
                                 <input id="numSimulations" type="number" min="1" max="100000" value="100000"
                                     class="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded text-gray-800" />
@@ -282,7 +382,8 @@
             <!-- Support Section -->
             <div class="mt-8 p-4 bg-emerald-50 rounded-lg border border-emerald-200">
                 <p class="text-gray-700 font-semibold mb-2">Enjoying this tool?</p>
-                <a href="https://paypal.me/dimantodorov" class="text-emerald-600 hover:underline inline-flex items-center gap-1 font-medium">
+                <a href="https://paypal.me/dimantodorov"
+                    class="text-emerald-600 hover:underline inline-flex items-center gap-1 font-medium">
                     Support its development ❤️
                 </a>
             </div>
@@ -291,121 +392,203 @@
         <!-- Main content area -->
         <div class="flex-1 w-full p-4 lg:p-8 overflow-y-auto">
             <!-- Hero Section -->
-            <div x-data="{ heroOpen: true }" class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg shadow mb-8 border border-emerald-100">
-                <button @click="heroOpen = !heroOpen" class="w-full flex items-center justify-between p-8 text-left hover:bg-emerald-100/30 transition">
-                    <h2 class="text-3xl font-bold text-emerald-900" style="font-family: 'Montserrat', sans-serif;">Your Retirement Journey</h2>
-                    <svg class="w-6 h-6 text-emerald-900 flex-shrink-0 ml-4 transition-transform duration-200" :class="{ 'rotate-180': !heroOpen }" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <div x-data="{ heroOpen: true }"
+                class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg shadow mb-8 border border-emerald-100">
+                <button @click="heroOpen = !heroOpen"
+                    class="w-full flex items-center justify-between p-8 text-left hover:bg-emerald-100/30 transition">
+                    <h2 class="text-3xl font-bold text-emerald-900" style="font-family: 'Montserrat', sans-serif;">Your
+                        Retirement Journey</h2>
+                    <svg class="w-6 h-6 text-emerald-900 flex-shrink-0 ml-4 transition-transform duration-200"
+                        :class="{ 'rotate-180': !heroOpen }" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </button>
                 <div x-show="heroOpen" x-transition class="px-8 pb-8 space-y-4">
                     <p class="text-lg text-emerald-800 leading-relaxed">
-                        Retirement planning is a lot to think about. This tool simulates thousands of possible futures based on your savings, contributions, and expected spending to show you a realistic range of outcomes.
+                        Retirement planning is a lot to think about. This tool simulates thousands of possible futures
+                        based on your savings, contributions, and expected spending to show you a realistic range of
+                        outcomes.
                     </p>
                     <p class="text-lg text-emerald-700 leading-relaxed">
-                        <strong>How it works:</strong> Enter your current savings, how much you plan to save each year, and what you expect to spend in retirement. We show you what different market scenarios could mean for your portfolio, so you can make decisions with more confidence.
+                        <strong>How it works:</strong> Enter your current savings, how much you plan to save each year,
+                        and what you expect to spend in retirement. We show you what different market scenarios could
+                        mean for your portfolio, so you can make decisions with more confidence.
+                    </p>
+                    <p class="text-lg text-emerald-700 leading-relaxed">
+                        <a href="resources.html"
+                            class="text-lg transition underline">Resources</a>
+
                     </p>
                     <div class="mt-4 p-3 bg-emerald-100 border border-emerald-300 rounded">
                         <p class="text-sm text-emerald-800">
-                            <strong>🔒 Your Privacy:</strong> All calculations run entirely in your browser; no data is stored or transmitted.
+                            <strong>🔒 Your Privacy:</strong> All calculations run entirely in your browser; no data is
+                            stored or transmitted.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- Chart Section -->
-            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-                <h2 class="text-2xl font-bold mb-6 text-emerald-700" style="font-family: 'Montserrat', sans-serif;">Outlook</h2>
-                <div class="relative w-full aspect-[16/9] bg-gray-50 rounded border border-gray-200">
-                    <canvas id="growthChart" class="absolute inset-0 w-full h-full"></canvas>
+            <!-- Chart and Summary Section - 2 Column Layout -->
+            <div class="flex flex-col lg:flex-row gap-6 mb-6">
+                <!-- Chart Section -->
+                <div class="flex-1 lg:flex-[3] bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-2xl font-bold mb-6 text-emerald-700" style="font-family: 'Montserrat', sans-serif;">
+                        Outlook</h2>
+                    <div class="relative w-full aspect-[16/9] bg-gray-50 rounded border border-gray-200">
+                        <canvas id="growthChart" class="absolute inset-0 w-full h-full"></canvas>
+                    </div>
+                </div>
+
+                <!-- Results Summary Section -->
+                <div class="flex-1 lg:flex-[2]">
+                    <div x-data="{ summaryOpen: true }"
+                        class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg shadow border border-emerald-100 h-full">
+                        <button @click="summaryOpen = !summaryOpen"
+                            class="w-full flex items-center justify-between p-6 text-left hover:bg-emerald-100/30 transition">
+                            <h2 class="text-2xl font-bold text-emerald-900"
+                                style="font-family: 'Montserrat', sans-serif;">What This Means</h2>
+                            <svg class="w-6 h-6 text-emerald-900 flex-shrink-0 transition-transform duration-200"
+                                :class="{ 'rotate-180': !summaryOpen }" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div x-show="summaryOpen" x-transition class="px-6 pb-6 space-y-6">
+                            <!-- Key Metrics -->
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-white rounded-lg p-4 shadow-sm">
+                                    <div x-data="{ tooltipVisible: false, tooltipText: 'Expected portfolio value when you retire', tooltipPosition: 'top' }"
+                                        x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });"
+                                        class="relative inline-block mb-2">
+                                        <div x-ref="tooltip" x-show="tooltipVisible"
+                                            :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }"
+                                            class="absolute min-w-56 text-sm z-50" x-cloak>
+                                            <div x-show="tooltipVisible" x-transition
+                                                class="relative px-2 py-1 text-white rounded bg-black/90">
+                                                <p x-text="tooltipText"
+                                                    class="block flex-shrink-0 text-xs whitespace-normal"></p>
+                                                <div
+                                                    class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
+                                                    <div
+                                                        class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p x-ref="content"
+                                            class="text-sm text-gray-600 cursor-help flex items-center gap-1">At
+                                            Retirement <span
+                                                class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold">i</span>
+                                        </p>
+                                    </div>
+                                    <p class="text-lg lg:text-xl font-bold text-emerald-700" id="portfolioAtRetirement">
+                                        --</p>
+                                </div>
+                                <div class="bg-white rounded-lg p-4 shadow-sm">
+                                    <div x-data="{ tooltipVisible: false, tooltipText: 'Projected portfolio balance at the end of your retirement', tooltipPosition: 'top' }"
+                                        x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });"
+                                        class="relative inline-block mb-2">
+                                        <div x-ref="tooltip" x-show="tooltipVisible"
+                                            :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }"
+                                            class="absolute min-w-56 text-sm z-50" x-cloak>
+                                            <div x-show="tooltipVisible" x-transition
+                                                class="relative px-2 py-1 text-white rounded bg-black/90">
+                                                <p x-text="tooltipText"
+                                                    class="block flex-shrink-0 text-xs whitespace-normal"></p>
+                                                <div
+                                                    class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
+                                                    <div
+                                                        class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p x-ref="content"
+                                            class="text-sm text-gray-600 cursor-help flex items-center gap-1">At Age 95
+                                            <span
+                                                class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold">i</span>
+                                        </p>
+                                    </div>
+                                    <p class="text-lg lg:text-xl font-bold text-emerald-700" id="portfolioAtEnd">--</p>
+                                </div>
+                                <div class="bg-white rounded-lg p-4 shadow-sm">
+                                    <div x-data="{ tooltipVisible: false, tooltipText: 'Percentage of simulations where you don\'t run out of money', tooltipPosition: 'top' }"
+                                        x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });"
+                                        class="relative inline-block mb-2">
+                                        <div x-ref="tooltip" x-show="tooltipVisible"
+                                            :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }"
+                                            class="absolute min-w-56 text-sm z-50" x-cloak>
+                                            <div x-show="tooltipVisible" x-transition
+                                                class="relative px-2 py-1 text-white rounded bg-black/90">
+                                                <p x-text="tooltipText"
+                                                    class="block flex-shrink-0 text-xs whitespace-normal"></p>
+                                                <div
+                                                    class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
+                                                    <div
+                                                        class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p x-ref="content"
+                                            class="text-sm text-gray-600 cursor-help flex items-center gap-1">Success
+                                            Rate <span
+                                                class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold">i</span>
+                                        </p>
+                                    </div>
+                                    <p class="text-lg lg:text-xl font-bold text-emerald-700" id="successRate">--</p>
+                                </div>
+                                <div class="bg-white rounded-lg p-4 shadow-sm">
+                                    <div x-data="{ tooltipVisible: false, tooltipText: 'Your most likely outcome based on current assumptions', tooltipPosition: 'top' }"
+                                        x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });"
+                                        class="relative inline-block mb-2">
+                                        <div x-ref="tooltip" x-show="tooltipVisible"
+                                            :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }"
+                                            class="absolute min-w-56 text-sm z-50" x-cloak>
+                                            <div x-show="tooltipVisible" x-transition
+                                                class="relative px-2 py-1 text-white rounded bg-black/90">
+                                                <p x-text="tooltipText"
+                                                    class="block flex-shrink-0 text-xs whitespace-normal"></p>
+                                                <div
+                                                    class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
+                                                    <div
+                                                        class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p x-ref="content"
+                                            class="text-sm text-gray-600 cursor-help flex items-center gap-1">Expected
+                                            Outcome <span
+                                                class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold">i</span>
+                                        </p>
+                                    </div>
+                                    <p class="text-lg lg:text-xl font-bold text-emerald-700" id="expectedOutcome">--</p>
+                                </div>
+                            </div>
+
+                            <!-- Guidance Text -->
+                            <div class="bg-white rounded-lg p-4 border border-emerald-200">
+                                <p class="text-emerald-800 leading-relaxed" id="guidanceText">
+                                    Adjust your numbers above to explore different scenarios and see how changes affect
+                                    your retirement outlook.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Results Summary Section -->
-            <div x-data="{ summaryOpen: true }" class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg shadow border border-emerald-100">
-                <button @click="summaryOpen = !summaryOpen" class="w-full flex items-center justify-between p-6 text-left hover:bg-emerald-100/30 transition">
-                    <h2 class="text-2xl font-bold text-emerald-900" style="font-family: 'Montserrat', sans-serif;">What This Means</h2>
-                    <svg class="w-6 h-6 text-emerald-900 flex-shrink-0 transition-transform duration-200" :class="{ 'rotate-180': !summaryOpen }" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </button>
-                <div x-show="summaryOpen" x-transition class="px-6 pb-6 space-y-6">
-                    <!-- Key Metrics -->
-                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div class="bg-white rounded-lg p-4 shadow-sm">
-                            <div x-data="{ tooltipVisible: false, tooltipText: 'Expected portfolio value when you retire', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                                <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute min-w-56 text-sm z-50" x-cloak>
-                                    <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                        <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
-                                        <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
-                                            <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p x-ref="content" class="text-sm text-gray-600 cursor-help flex items-center gap-1">At Retirement <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold">i</span></p>
-                            </div>
-                            <p class="text-lg lg:text-xl font-bold text-emerald-700" id="portfolioAtRetirement">--</p>
-                        </div>
-                        <div class="bg-white rounded-lg p-4 shadow-sm">
-                            <div x-data="{ tooltipVisible: false, tooltipText: 'Projected portfolio balance at the end of your retirement', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                                <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute min-w-56 text-sm z-50" x-cloak>
-                                    <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                        <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
-                                        <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
-                                            <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p x-ref="content" class="text-sm text-gray-600 cursor-help flex items-center gap-1">At Age 95 <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold">i</span></p>
-                            </div>
-                            <p class="text-lg lg:text-xl font-bold text-emerald-700" id="portfolioAtEnd">--</p>
-                        </div>
-                        <div class="bg-white rounded-lg p-4 shadow-sm">
-                            <div x-data="{ tooltipVisible: false, tooltipText: 'Percentage of simulations where you don\'t run out of money', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                                <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute min-w-56 text-sm z-50" x-cloak>
-                                    <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                        <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
-                                        <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
-                                            <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p x-ref="content" class="text-sm text-gray-600 cursor-help flex items-center gap-1">Success Rate <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold">i</span></p>
-                            </div>
-                            <p class="text-lg lg:text-xl font-bold text-emerald-700" id="successRate">--</p>
-                        </div>
-                        <div class="bg-white rounded-lg p-4 shadow-sm">
-                            <div x-data="{ tooltipVisible: false, tooltipText: 'Your most likely outcome based on current assumptions', tooltipPosition: 'top' }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });" class="relative inline-block mb-2">
-                                <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-0 -mt-0.5 -translate-y-full' : tooltipPosition == 'top' }" class="absolute min-w-56 text-sm z-50" x-cloak>
-                                    <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-black/90">
-                                        <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-normal"></p>
-                                        <div class="absolute bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full inline-flex overflow-hidden justify-center items-center">
-                                            <div class="w-1.5 h-1.5 transform bg-black/90 origin-top-left -rotate-45"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p x-ref="content" class="text-sm text-gray-600 cursor-help flex items-center gap-1">Expected Outcome <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 text-gray-700 text-xs font-bold">i</span></p>
-                            </div>
-                            <p class="text-lg lg:text-xl font-bold text-emerald-700" id="expectedOutcome">--</p>
-                        </div>
-                    </div>
-
-                    <!-- Guidance Text -->
-                    <div class="bg-white rounded-lg p-4 border border-emerald-200">
-                        <p class="text-emerald-800 leading-relaxed" id="guidanceText">
-                            Adjust your numbers above to explore different scenarios and see how changes affect your retirement outlook.
-                        </p>
-                    </div>
+            <footer class="gradient-primary">
+                <div class="container mx-auto text-center py-6">
+                    <p class="font-medium text-white">&copy; 2026 <a href="https://www.linkedin.com/in/dimantodorov/"
+                            class="underline hover:text-gray-200 transition">Diman Todorov</a> - All rights reserved.
+                        This tool is provided for educational purposes. <a href="terms.html"
+                            class="text-lg text-white hover:text-gray-200 transition underline">Terms & Disclaimer</a>
+                    </p>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="gradient-primary">
-        <div class="container mx-auto text-center py-6">
-            <p class="font-medium text-white">&copy; 2026 <a href="https://www.linkedin.com/in/dimantodorov/" class="underline hover:text-gray-200 transition">Diman Todorov</a> - All rights reserved. This tool is provided for educational purposes. <a href="terms.html" class="text-lg text-white hover:text-gray-200 transition underline">Terms & Disclaimer</a></p>
-        </div>
-    </footer>
+            </footer>
 </body>
 <script src="script.js"></script>
 

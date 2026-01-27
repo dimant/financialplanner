@@ -333,19 +333,6 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             updateGrowthChart(startYear, dataGenerator);
         });
-
-        // Update chart when inputs lose focus (blur event)
-        const inputs = form.querySelectorAll('input[type="number"]');
-        inputs.forEach(input => {
-            input.addEventListener('blur', function () {
-                updateGrowthChart(startYear, dataGenerator);
-                // Close drawer on mobile by clicking the close button
-                const closeBtn = document.querySelector('nav button[class*="lg:hidden"]');
-                if (closeBtn) {
-                    closeBtn.click();
-                }
-            });
-        });
     }
 
     // Also add direct click handler to button for desktop
